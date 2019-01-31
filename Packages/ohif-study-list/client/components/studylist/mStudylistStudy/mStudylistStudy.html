@@ -1,0 +1,54 @@
+<template name="mStudylistStudy">    
+    <hr class="hrLine"> 
+    <table class="studylistStudy noselect table {{#if this.selected}}active{{/if}}">
+        <tbody>
+            <tr>
+                <td width="40%" class="textUpper patientName">Patient Name</td>
+                <td class="pname">{{formatPN patientName}}</td>
+            </tr>
+            <tr>
+                <td width="40%" class="textUpper patientDob">Patient DOB</td>
+                <td>{{formatPN patientBirthdate}}</td>
+            </tr>
+            <tr>
+                <td width="40%" class="textUpper patientId">MRN</td>
+                <td>{{patientId}}</td>
+            </tr>
+            <tr>
+                <td width="40%" class="textUpper accessionNumber">Accession #</td>
+                <td>{{accessionNumber}}</td>
+            </tr>
+            <tr>
+                <td width="40%" class="textUpper studyDate">Study Date</td>
+                <td>{{formatDA studyDate}}</td>
+            </tr>
+            <tr>
+                <td width="40%" class="textUpper modalities">Modality</td>
+                <td>{{modalities}}</td>
+            </tr>
+            <tr>
+                <td width="40%" class="textUpper studyDescription">Study Description</td>
+                <td>{{studyDescription}}</td>
+            </tr>
+            <tr>
+                <td width="40%"></td>
+                <td class="studyAction">
+                    <div tabindex="1" class="toolbarSectionButton rp-x-1 imageViewerCommand imageViewerReport">
+                        <div class="svgContainer" title="View Report">
+                            <svg>
+                                <use xlink:href="images/nav-view-report.svg#on-over"></use>
+                            </svg>
+                        </div>
+                    </div>
+                    <div tabindex="1" class="toolbarSectionButton rp-x-1 imageViewerCommand imageViewerShare {{#if checkPatientId}}disabled{{/if}}">
+                        <div class="svgContainer {{#if checkPatientId}}disabled{{/if}}" title="Share">
+                            <svg>
+                                <use xlink:href="images/nav-share.svg#on-over"></use>
+                            </svg>
+                        </div>
+                    </div>                    
+                </td>
+            </tr>
+        </tbody>        
+    </table>    
+</template>

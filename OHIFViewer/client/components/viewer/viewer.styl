@@ -1,0 +1,135 @@
+@import "{ohif:design}/app"
+
+body.loginPage{
+  background-image: url(images/Image.jpg) !important;
+  background-repeat: no-repeat !important;
+  background-position: 0px -185px !important;
+  background-size: cover !important;
+  background-color: #122538 !important;
+}
+body.loginPage>.header {
+  background-color: transparent  !important;
+}
+.login-wrapper {
+  background-color: transparent  !important;
+}
+
+
+#viewer
+  background-color: black
+  height: calc(100% - 40px)
+  width: 100%
+  margin-top: -10px
+.loadingTextDiv
+  theme('color', '$textSecondaryColor')
+  font-size: 30px
+
+.studylogo-text
+{
+  display: inline-block;
+  font-size: 16px;
+  background: url(/images/study-list-off.svg);
+  background-repeat: no-repeat;
+  background-position: 0px;
+  padding-left: 20px;
+  font-weight: bold;
+  margin-left: 32px;
+  margin-bottom: 13px;  
+  text-decoration: none;
+}
+
+.studylogo-text:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/** mobile view css start **/
+/* smartphones, iPhone, portrait 480x320 phones */
+@media (min-width:320px) {
+  #viewer {
+    margin-top: 0px;
+  }
+  body>.header .header-menu .logo-image {
+    margin-left: 0px;
+  }
+  .backToStudylist .studylogo-text {
+
+  }
+}
+/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+@media (min-width:481px) {
+  #viewer {
+    margin-top: 0px;
+  }
+}
+/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+@media (min-width:641px) {
+  #viewer {
+    margin-top: 0px;
+  }
+}
+@media (min-width:700px) {
+  #viewer {
+    margin-top: -60px;
+  }
+  .backToStudylist .studylogo-text {
+    position: relative;
+    z-index: 1;
+    top: 53px;
+    margin-bottom: 0px;
+    padding-top: 5px;
+  }
+  .viewerSection {
+    padding-top: 15px;
+  }
+}
+@media (min-width:750px) {
+  #viewer {
+    margin-top: -60px;
+  }
+}
+@media (min-width:860px) {
+  #viewer {
+    margin-top: -60px;
+  }
+}
+/* tablet, landscape iPad, lo-res laptops ands desktops */
+@media (min-width:961px) {
+  #viewer {
+    margin-top: -60px;
+  }
+  body>.header .header-menu .logo-image {
+    margin-left: 50px;
+  }
+  .backToStudylist .studylogo-text {
+    top: 0px;
+  }
+}
+/* hi-res laptops and desktops */
+@media (min-width:1281px) {
+  body>.header .header-menu .logo-image {
+    margin-left: 50px;
+  }
+  #viewer {
+    margin-top: -45px;
+  }
+  
+}
+@media (min-width:1500px) {
+  body>.header .header-menu .logo-image {
+    margin-left: 50px;
+  }
+}
+@media (min-width:1670px) {
+  body>.header .header-menu .logo-image {
+    margin-left: 50px;
+  }
+  .backToStudylist .studylogo-text {
+    margin-bottom: 0px;
+    position: unset;
+    z-index: unset;
+    top: unset;
+    padding-top: unset;
+  }
+}
+/** mobile view css end **/

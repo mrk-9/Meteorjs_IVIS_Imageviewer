@@ -1,0 +1,50 @@
+<template name="studylistStudy">    
+    <tr class="studylistStudy noselect {{#if this.selected}}active{{/if}}">
+        <td class="patientName">
+            {{formatPN patientName}}
+        </td>
+        <td class="patientDob">
+            {{formatPN patientBirthdate}}
+        </td>
+        <td class="patientId">
+            {{patientId}}
+        </td>
+        <td class="accessionNumber">
+            {{accessionNumber}}
+        </td>
+        <td class="studyDate">
+            {{formatDA studyDate}}
+        </td>
+        <td class="modalities">
+            {{modalities}}
+        </td>
+        <td class="studyDescription">
+            {{studyDescription}}
+        </td>
+        <td class="studyAction">
+        <div tabindex="1" class="toolbarSectionButton rp-x-1 imageViewerCommand imageViewerReport">
+            <div class="svgContainer" title="View Report">
+            <svg>
+                <use xlink:href="images/nav-view-report.svg#on-over"></use>
+            </svg>
+            </div>
+        </div>
+        <div tabindex="1" class="toolbarSectionButton rp-x-1 imageViewerCommand imageViewerShare {{#if checkPatientId}}disabled{{/if}}">
+            <div class="svgContainer {{#if checkPatientId}}disabled{{/if}}" title="Share" >
+            <svg>
+                <use xlink:href="images/nav-share.svg#on-over"></use>
+            </svg>
+            </div>
+        </div>
+        </td>
+        <!-- <td class="studyShare">
+        <div tabindex="1" class="toolbarSectionButton rp-x-1 imageViewerCommand imageViewerShare">
+            <div class="svgContainer">
+            <svg>
+                <use xlink:href="/images/nav-share.svg#on-over"></use>
+            </svg>
+            </div>
+        </div>
+        </td> -->
+    </tr>    
+</template>

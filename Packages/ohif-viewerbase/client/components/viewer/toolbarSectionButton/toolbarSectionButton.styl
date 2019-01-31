@@ -1,0 +1,68 @@
+@import "{ohif:design}/app"
+.seperator
+  background-color:#20a5d6
+  min-width:1px
+  width:1px
+  height:40px
+  margin-left:7px
+  margin-right:10px
+  position:relative
+  display:inline-block
+.toolbarSectionButton
+  cursor: pointer
+  display: inline-block
+  min-width: 30px
+  outline: none
+  position: relative
+  text-align: center
+  &.disabled
+    &>.buttonLabel, &>.svgContainer
+      opacity: 0.5
+      cursor: not-allowed
+
+      &:hover
+        &, i
+          theme('color', '$textSecondaryColor')
+
+  .buttonLabel
+    theme('color', '$textSecondaryColor')
+    font-size: 12px
+    font-weight: 500
+    padding-top:5px
+  .svgContainer
+    margin: 0 auto
+    text-align: center
+    width:26px
+    height:26px
+
+    i
+      theme('color', '$textSecondaryColor')
+      font-size: 18px
+      line-height: 30px
+
+  svg
+    width: 26px
+    height: 26px
+    background-color:transparent
+
+  &:hover
+    &>.buttonLabel
+      theme('color', '$hoverColor')
+
+      &>i
+        theme('color', '$hoverColor')
+
+  &:active, &.active
+    &>.buttonLabel, &>.svgContainer
+      theme('color', '$activeColor')
+
+      svg
+        theme('fill', '$activeColor')
+      i
+        theme('color', '$activeColor')
+
+@media (max-width:1200px) and (min-width:978px) {
+  .seperator {
+    display: none;
+  }
+}

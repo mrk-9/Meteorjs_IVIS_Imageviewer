@@ -1,0 +1,57 @@
+@import "{ohif:design}/app"
+
+$height = 25px
+
+.roundedButtonGroup
+  position: relative
+  top:0px
+  float:left
+
+  .roundedButtonWrapper
+    cursor: pointer
+    display: inline-block
+    float: left
+    margin-left: -2px
+    text-decoration: none
+    text-align: center
+
+    &.disabled
+      opacity: 0.5
+      cursor: not-allowed
+
+    .roundedButton
+      align-items: center
+      background:transparent
+      display: flex
+      font-size: 11px
+      font-weight: 500
+      justify-content: center
+      height: $height
+      line-height: $height
+      position: relative
+      text-transform: uppercase
+      transition: transition($sidebarTransition)
+
+      svg
+        theme('fill', '#00a4d9')
+        width:25px
+        height:25px
+      span
+        margin: 0 2px
+
+      i
+        line-height: 15px
+        font-size: 15px
+
+    .bottomLabel
+      theme('color', '$textSecondaryColor')
+      font-size: 12px
+      font-weight: 500
+      line-height: 12px
+      margin-top: 8px
+
+    &:first-child
+      margin-left: 0
+      .roundedButton
+        border-bottom-left-radius: $height
+        border-top-left-radius: $height

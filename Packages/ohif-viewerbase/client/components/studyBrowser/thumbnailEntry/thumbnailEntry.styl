@@ -1,0 +1,62 @@
+@import "{ohif:design}/app"
+
+$seriesCountBackgroundColor = #678696
+
+.thumbnailEntry
+  cursor: pointer
+  display: table
+  margin: 0 auto
+
+  &.draggable
+    cursor: copy
+    cursor: -webkit-grab
+    cursor: -moz-grab
+
+.thumbnailEntry .seriesDetails
+  theme('color', '$textPrimaryColor')
+  font-size: 14px
+  line-height: 1.3em
+  margin-top: 5px
+  max-width: 217px
+  min-height: 36px
+  position: relative
+  word-wrap: break-word
+
+.info-only .seriesDescription
+  display: none
+
+.info-only .seriesInformation
+  display: flex
+  flex-grow: 1
+  float: none
+  max-width: none
+  padding-right: 0
+
+.info-only .item
+  flex: 1
+  text-align: right!important
+  float:right
+  width:100%
+
+.info-only .icon, .info-only .value
+  display: inline
+  float: none
+  line-height: 25px
+
+.info-only .value          
+  margin-left: 0
+  width: auto
+
+.seriesDetails .seriesInformation
+  padding-right: 4px
+  max-width: 50px
+.seriesDetails .seriesInformation .item-frames .value      
+  border: 2px solid #00a4d9;
+  border-radius: 11px;
+  padding: 0px 5px;
+  /*width: 28px !important;*/
+  text-align: center;
+  font-size:12px
+  margin-top: 2px;
+  margin-right:2px;
+  color:#91b9cd

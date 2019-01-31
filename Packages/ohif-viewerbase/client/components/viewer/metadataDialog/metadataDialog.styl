@@ -1,0 +1,60 @@
+@require '{ohif:design}/app'
+
+#metadataDialog
+  background:transparent
+  cursor: move
+  overflow: hidden
+  padding: 0
+  position: absolute
+  .form-group
+  	margin-top:15px
+  z-index: 1000
+  .modal-dialog
+  	margin:0 0;
+  .image-preview
+    display: table
+    margin: 0 auto
+
+    h3
+      white-space: nowrap
+
+  .viewport-preview
+    max-width: 512px
+    max-height: 512px
+#metadataDialog .modal-dialog {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 70px;
+}
+#metadataDialog .modal-footer button {
+  color: #00aeef;
+}
+#metadataDialog .table-responsive {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: calc(100vh - 143px);
+}
+#metadataDialog .table-responsive::-webkit-scrollbar {
+    width: 5px;
+}
+ 
+#metadataDialog .table-responsive::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+#metadataDialog .table-responsive::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+@media screen and (max-width: 767px) {
+  #metadataDialog .table-responsive {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: calc(100vh - 143px);
+  }
+  #metadataDialog .modal-dialog {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 70px;
+  }  
+}

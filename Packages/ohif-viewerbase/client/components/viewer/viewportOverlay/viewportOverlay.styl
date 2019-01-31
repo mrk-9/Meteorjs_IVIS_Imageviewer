@@ -1,0 +1,78 @@
+@import "{ohif:design}/app"
+
+$viewportTagPadding = 20px
+
+.imageViewerViewport.empty ~ .imageViewerViewportOverlay
+  display: none
+
+.imageViewerViewportOverlay
+  theme('color', '$textSecondaryColor')
+
+  .dicomTag
+    position: absolute
+    font-weight: 400
+    text-shadow: 1px 1px black
+    pointer-events: none
+    color: #A0A09F;
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: bold;
+
+  .topleft
+    top: -14px
+    left: 30px
+    margin-left:10px
+    margin-top:7px;
+    color: #00a4d9;
+    font-family: "Source Sans Pro";
+    font-size: 22px;
+    font-weight: bold;
+  .topright
+    top: $viewportTagPadding
+    right: $viewportTagPadding
+    text-align: right
+
+  .bottomleft
+    bottom: $viewportTagPadding
+    left: $viewportTagPadding
+
+  .bottomright
+    bottom: $viewportTagPadding
+    right: $viewportTagPadding
+    text-align: right
+
+  .priorIndicator
+    font-weight: bold
+    color: yellow
+
+  &.controlsVisible
+    .topright, .bottomright
+      right: "calc(%s + 19px)" % $viewportTagPadding
+
+  svg
+    theme('color', '$defaultColor')
+    theme('fill', '$defaultColor')
+    theme('stroke', '$defaultColor')
+    background-color: transparent
+    margin: 2px
+    width: 18px
+    height: 18px
+
+  @media only screen and (max-width:930px)
+    .bottomright
+      position: absolute
+      bottom: 0px;
+    .bottomleft
+      position: absolute
+      bottom: 0px;
+  @media only screen and (max-width:380px)
+    .bottomright
+      bottom: 130px
+    .bottomleft
+      bottom: 130px
+  @media only screen and (max-width:699px)
+    .bottomright
+      bottom: 80px
+    .bottomleft
+      bottom: 80px
+

@@ -1,0 +1,747 @@
+<template name="studylistResult">
+    <!-- <div class="studyListToolbar clearfix">
+
+    </div> -->
+    
+    <div class="mobileView">
+      <div class="container studyContainer">
+        <div class="">             
+            <div id="sidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closeSideNav">&times;</a>
+                <a href="#">LOGOUT</a>
+                <a href="#studyListSection" class="active">Study List</a>
+                <a href="#imageShareSection">Image Shares</a>
+                <a href="#orderMgmtSection">Document Management</a>
+                <a href="#settingSection">Settings</a>
+            </div>
+            <div id="studyListSection" class="tab-content">
+              <span class="contentText">Study List</span>
+              <span class="navIcon">&#9776;</span>
+              <div class="col-md-12 filters padd-left-0 padd-right-0">
+                  <div class="filterBox"><a class="daterangeBtn" id="all">All</a></div>
+                  <div class="filterBox"><a class="daterangeBtn" id="today">Today</a></div>
+                  <div class="filterBox"><a class="daterangeBtn" id="last7days">7 days</a></div>
+                  <div class="filterBox"><a class="daterangeBtn" id="last14days">14 days</a></div>
+                  <div class="filterBox"><a class="daterangeBtn" id="thismonth">30 days</a></div>
+                  <div class="filterBox"><a class="daterangeBtn" id="last90days">90 days</a></div>
+                  <div class="filterBox"><a class="" id="filterCalendar"><input type="hidden" id="studyDaterange" value=""><i class="fa fa-calendar-o" aria-hidden="true"></i></a></div>
+                  <div class="filterBox"><a class="" id="searchFilter"><i class="fa fa-search" aria-hidden="true"></i></a></div>
+              </div>
+              <div class="col-md-12 padd-left-0 padd-right-0 searchDiv">
+                <div class="col-md-6 width-50">
+                  <select class="from-control-textbox" name="studySearchType" id="studySearchType">
+                    <option value="">Search by</option>
+                    <option value="patientName">Patient name</option>
+                    <!-- <option value="patient dob">Patient DOB</option> -->
+                    <option value="patientId">MRN</option>
+                    <option value="accessionNumber">Accession</option>
+                    <!-- <option value="study date">Study date</option> -->
+                    <option value="modalitiesInStudy">Modality</option>
+                    <option value="studyDescription">Study Description</option>
+                  </select>
+                </div>
+                <div class="col-md-6 width-50">
+                  <input type="text" class="from-control-textbox" name="studySearch" id="studySearchValue" placeholder="Search">
+                </div>
+                <button class="btn btn-confirm btn-primary form-action" id="studySearch" >SEARCH</button>
+              </div>
+              <div class="margin-top-10">
+                <span id="mstudyCount">{{numberOfStudies}}</span><span class="studyCountText">STUDIES LISTED</span>                
+              </div>            
+              <div id="mStudyListContainer" class="studyListContainer margin-top-10">
+                {{#each study in studies}}
+                    {{>mStudylistStudy (clone study this)}}
+                {{/each}}
+                {{#if session "showLoadingText"}}
+                    <hr class="hrLine"> 
+                    {{>loadingText}}
+                {{else}}
+                    {{#if session "serverError"}}
+                        <div class="notFound">There was an error fetching studies</div>
+                    {{else}}
+                        {{#unless numberOfStudies}}
+                            <div class="notFound">No matching results</div>
+                        {{/unless}}
+                    {{/if}}
+                {{/if}}   
+              </div>
+            </div> <!-- end of studylist section-->
+            <div id="imageShareSection" class="tab-content">
+              <span class="contentText">Image Shares</span>
+              <span class="navIcon">&#9776;</span>
+              {{#if imageShareDataMobile}}
+                {{#each shares in imageShareDataMobile}}
+                  <hr class="hrLine"> 
+                  <table class="noselect imageShareList table">
+                    <tbody>                        
+                        <tr>
+                            <td width="40%" class="textUpper">Sharer</td>
+                            <td class="sname">{{shares.sharer_name}}</td>
+                        </tr>
+                        <tr>
+                            <td width="40%" class="textUpper">Index</td>
+                            <td class="">{{shares.index}}</td>
+                        </tr>
+                        <tr>
+                            <td width="40%" class="textUpper">Study Description</td>
+                            <td class="sdesc">{{shares.study_description}}</td>
+                        </tr>
+                        <tr>
+                            <td width="40%" class="textUpper">Study Date</td>
+                            <td>{{shares.study_date}}</td>
+                        </tr>
+                        <tr>
+                            <td width="40%" class="textUpper">Date Shared</td>
+                            <td class="screated">{{shares.created_at}}</td>
+                        </tr>
+                        <tr>
+                            <td width="40%" class="textUpper">Shared Email</td>
+                            <td>{{shares.target_patient_email}}</td>
+                        </tr>
+                        <tr>
+                            <td width="40%" class="textUpper">Duration</td>
+                            <td>{{shares.duration}}</td>
+                        </tr>
+                        <tr>
+                            <td width="40%"></td>
+                            <td class="studyAction">
+                                <input type="hidden" class="mshareID" value="{{shares.share_id}}">
+                                <input type="hidden" class="mshareActControls" value="{{shares.activeControls}}">
+                                <button rel='reshare' class='btn btn-primary btn-sm reshare' style='background: none;border: none;' title='Share this again' data-container='body' aria-expanded='false' data-placement='top' data-toggle='modal' >
+                                  <div tabindex='1' class='toolbarSectionButton rp-x-1 imageViewerCommand imageViewerReshare' rel='reshare'>
+                                    <div class='svgContainer' title='Share this again' rel='reshare'>
+                                      <svg><use xlink:href='images/nav-share.svg#on-over'></use></svg>
+                                    </div>
+                                  </div>
+                                </button>
+                                <button rel='cancel' class='btn btn-default btn-sm share-cancel-button' type='button' disabled data-toggle='tooltip' data-container='body' data-placement='bottom' title='This share was canceled'>
+                                  <div tabindex='1' class='toolbarSectionButton rp-x-1 imageViewerCommand imageViewerCancel' rel='cancel'>
+                                    <img rel='cancel' title='This share was canceled' src='images/cancel.png' style='width: 26px;margin-bottom: 7px;'>
+                                  </div>
+                                </button>                                                  
+                            </td>
+                        </tr>
+                    </tbody>        
+                  </table>
+                  {{/each}}
+                  <button class="col-md-12" id="loadImageShareMobile">Load More</button> 
+              {{ /if }}   
+            </div> <!-- end of imageShareSection section-->
+            <div id="orderMgmtSection" class="tab-content">
+                <span class="contentText">Document Management</span>
+                <span class="navIcon">&#9776;</span>
+                  {{#if orderDataMobile}}
+                    {{#each orders in orderDataMobile}}
+                      <hr class="hrLine"> 
+                      <table class="noselect orderMgmtList table">
+                        <tbody>                        
+                            <!-- <tr>
+                                <td width="40%" class="textUpper"></td>
+                                <td class="">
+                                  {{# if orders.pdfPath}}
+                                  <input type='checkbox' class='checkbox order_delete_checkbox' name='delete_check[]' value='{{orders.pdfPath}}'>
+                                  {{ else }}
+                                  <input type='checkbox' disabled class='checkbox order_delete_checkbox' name='delete_check[]' value='{{orders.pdfPath}}'>
+                                  {{/if}}
+                                </td>
+                            </tr> -->
+                            <tr>
+                                <td width="40%" class="textUpper">Patient</td>
+                                <td class="opname">{{orders.patientName}}</td>
+                            </tr>
+                            <tr>
+                                <td width="40%" class="textUpper">Group</td>
+                                <td class="">{{orders.org}}</td>
+                            </tr>
+                            <tr>
+                                <td width="40%" class="textUpper">Format</td>
+                                <td class="">{{orders.template}}</td>
+                            </tr>
+                            <tr>
+                                <td width="40%" class="textUpper">Referrer</td>
+                                <td>{{orders.RefDr}}</td>
+                            </tr>
+                            
+                            <tr>
+                                <td width="40%" class="textUpper">Order date</td>
+                                <td>{{orders.created_at}}</td>
+                            </tr>
+                            <tr>
+                                <td width="40%" class="textUpper">User</td>
+                                <td>{{orders.username}}</td>
+                            </tr>
+                            <tr>
+                                <td width="40%" class="textUpper">Type</td>
+                                <td>{{orders.orderType}}</td>
+                            </tr>
+                            <tr>
+                                <td width="40%"></td>
+                                <td class="studyAction">  
+                                  {{# if orders.pdfPath}}                                  
+                                  <div tabindex="1" class="toolbarSectionButton rp-x-1 imageViewerCommand ssPDF" data-file="{{orders.pdfPath}}">
+                                    <div class="svgContainer" title="View PDF" data-file="{{orders.pdfPath}}">
+                                      <svg><use xlink:href="images/nav-view-report.svg#on-over"></use></svg>
+                                    </div>
+                                  </div>
+                                  {{else}}
+                                  <div tabindex="1" class="toolbarSectionButton rp-x-1 imageViewerCommand ssPDF disabled" data-file="{{orders.pdfPath}}">
+                                    <div class="svgContainer" title="File does not exist or has been moved" data-file="{{orders.pdfPath}}">
+                                      <svg><use xlink:href="images/nav-view-report.svg#on-over"></use></svg>
+                                    </div>
+                                  </div>
+                                  {{ /if }}                                                  
+                                </td>
+                            </tr>
+                        </tbody>        
+                      </table>
+                      {{/each}}
+                      <button class="col-md-12" id="loadOrderDataMobile">Load More</button> 
+                  {{ /if }}   
+            </div> <!-- end of orderMgmtSection section-->
+            <div id="settingSection" class="tab-content">
+              <p>Settings</p>
+            </div> <!-- end of settingSection section-->
+        </div>
+      </div><!-- end of container -->
+    </div>
+    
+      <div class="desktopView">
+        <div class="container studyContainer">
+          <div class="row">
+            <div class="padd-right-0">
+              <ul class="nav nav-tabs">
+                <li class="logoutTab"><a id="logoutLink">LOGOUT</a></li>
+                <li class="active border-top-left-radius-10" ><a href="#tab_a" data-toggle="tab" class="border-top-left-radius-10">Study List</a></li>
+                {{#unless checkPatientId}}
+                <li><a href="#tab_b" data-toggle="tab">Image Shares</a></li>
+                <li><a href="#tab_c" data-toggle="tab">Document Management</a></li>
+                {{#unless getUserPrivilege}}<li><a href="#tab_d" data-toggle="tab">Settings</a></li>{{/unless}} {{/unless}}
+              </ul>
+            </div>
+            <div class="col-md-12 contentDiv" >
+              <div class="tab-content">
+                  <div class="tab-pane active" id="tab_a">
+                      <p class="contentText">Study List</p>
+                      <div class="col-md-12 padd-left-0" style="padding-bottom: 16px;">
+                        <div class="filters padd-left-0 padd-right-0">
+                          <div class="filterBox"><a class="daterangeBtn" id="all">All</a></div>
+                          <div class="filterBox"><a class="daterangeBtn" id="today">Today</a></div>
+                          <div class="filterBox"><a class="daterangeBtn" id="last7days">7 days</a></div>
+                          <div class="filterBox"><a class="daterangeBtn" id="last14days">14 days</a></div>
+                          <div class="filterBox"><a class="daterangeBtn" id="thismonth">30 days</a></div>
+                          <div class="filterBox"><a class="daterangeBtn" id="last90days">90 days</a></div>
+                          <!-- <div>Custom<input type="radio" name="daterangeValue" class="daterangeBtn" value="custom"></div> -->
+                        </div>
+                        <div class="col-md-2 padd-right-0">
+                          <input type="text"
+                          class="form-control"
+                          style=""
+                          name="daterange"
+                          id="filterDateRange"
+                          placeholder="Custom Date Range">
+                        </div>
+                        <div class="col-md-1 padd-right-0" style="">
+                          <input type="text" readonly
+                            class="form-control"
+                            style=""
+                            name="studyCount"
+                            id="studyCount"
+                            value="{{numberOfStudies}}" >
+                          </div>
+                          <div class="col-md-2 padd-right-0">
+                            <p class="studyCountText">STUDIES LISTED</p>
+                          </div>
+                      </div>
+                      <hr class="hrLine">
+                      <div id="studyListContainer" class="table-responsive">
+                        <table id="tblStudyList" class="studylistResult table noselect">
+                            <thead>
+                              <tr>
+                                  <th class="patientName">
+                                      <div id="_patientName" class="sortingCell">
+                                          <span>Patient Name</span>
+                                          <i class="{{sortingColumnsIcons.patientName}}">&nbsp;</i>
+                                      </div>
+                                      <input type="text"
+                                            class="form-control studylist-search"
+                                            id="patientName"
+                                            placeholder="Search Names">
+                                  </th>
+                                  <th class="patientDob">
+                                      <div id="_patientDob" class="sortingCell">
+                                          <span>Patient Dob</span>
+                                          <i class="{{sortingColumnsIcons.patientBirthdate}}">&nbsp;</i>
+                                      </div>
+                                      <input type="text"
+                                            class="form-control studylist-search"
+                                            id="patientDob"
+                                            placeholder="Search DOB">
+                                  </th>
+                                  <th class="patientId">
+                                      <div id="_patientId" class="sortingCell">
+                                          <span>MRN</span>
+                                          <i class="{{sortingColumnsIcons.patientId}}">&nbsp;</i>
+                                      </div>
+                                      <input type="text"
+                                            class="form-control studylist-search"
+                                            id="patientId"
+                                            placeholder="Search MRN">
+                                  </th>
+                                  <th class="accessionNumber">
+                                      <div id="_accessionNumber" class="sortingCell ">
+                                          <span>Accession #</span>
+                                          <i class="{{sortingColumnsIcons.accessionNumber}}">&nbsp;</i>
+                                      </div>
+                                      <input type="text"
+                                            class="form-control studylist-search"
+                                            id="accessionNumber"
+                                            placeholder="Search Accession #">
+                                  </th>
+                                  <th class="studyDate">
+                                      <div id="_studyDate" class="sortingCell">
+                                          <span>Study Date</span>
+                                          <i class="{{sortingColumnsIcons.studyDate}}">&nbsp;</i>
+                                      </div>
+                                      <input type="text"
+                                            class="form-control studylist-search"
+                                            name="daterange"
+                                            id="studyDate"
+                                            placeholder="Search Study Date">
+                                  </th>
+                                  <th class="modalities">
+                                      <div id="_modalities" class="sortingCell">
+                                          <span>Modality</span>
+                                          <i class="{{sortingColumnsIcons.modalities}}">&nbsp;</i>
+                                      </div>
+                                      <input type="text"
+                                            class="form-control studylist-search"
+                                            id="modality"
+                                            placeholder="Search Modality">
+                                  </th>
+                                  <th class="studyDescription">
+                                      <div id="_studyDescription" class="sortingCell">
+                                          <span>Study Description</span>
+                                          <i >&nbsp;</i>
+                                      </div>
+                                      <input type="text"
+                                            class="form-control studylist-search"
+                                            id="studyDescription"
+                                            placeholder="Search Study Description">
+                                  </th>
+                                  <th class="studyAction">
+                                      <div id="_studyAction" class="sortingCell">
+                                          <span></span>
+                                          <i >&nbsp;</i>
+                                      </div>
+                                  </th>
+                              </tr>
+                            </thead>
+                            <tbody id="studyListData">
+                                {{#each study in studies}}
+                                    {{>studylistStudy (clone study this)}}
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        {{#if session "showLoadingText"}}
+                            {{>loadingText}}
+                        {{else}}
+                            {{#if session "serverError"}}
+                                <div class="notFound">There was an error fetching studies</div>
+                            {{else}}
+                                {{#unless numberOfStudies}}
+                                    <div class="notFound">No matching results</div>
+                                {{/unless}}
+                            {{/if}}
+                        {{/if}}
+                      </div>
+
+                  </div> <!--TAB1 END-->
+                  <div class="tab-pane imageShare-modal" id="tab_b">
+                      <p class="contentText">Image Shares</p>
+
+                      <div class="col-md-12 padd-left-0 padd-bottom-16">
+                        <div class="col-md-1 filters padd-left-0 padd-right-0" style="border:none;">
+                          <div><a class="imageShareAll" id="showall">Show All</a></div>
+                        </div>
+                        <div class="col-md-2 padd-right-0" style="border-left: 1px solid #6d6e71;">
+                          <input type="text"
+                          class="form-control"
+                          style=""
+                          name="daterange"
+                          id="shareDateRange"
+                          placeholder="Date Range">
+                        </div>
+                      </div>
+                      <div class="col-md-12 padd-left-0 table-responsive" style="bottom: 50px;">
+                        {{#if session "showLoaderImageShare"}}
+                            {{>loadingText}}
+                        {{ /if }}    
+                        {{#if settings}}
+                          {{> reactiveTable collection=collection fields=fields settings=settings}}
+                          <button class="col-md-12" id="loadMoreImageShare">Load More</button>
+                        {{ /if }}
+                      </div>
+
+                  </div>
+                  <div class="tab-pane order-modal" id="tab_c">
+                      <p class="contentText">Document Management</p>
+                      <div class="col-md-12 padd-left-0 padd-bottom-16">
+                        <div class="col-md-2 filters padd-left-0 padd-right-0">
+                          <div><a class="orderTypeFilter" id="all">All</a></div>
+                          <div><a class="orderTypeFilter" id="Web">Web</a></div>
+                          <div><a class="orderTypeFilter" id="Print">Print</a></div>
+                          <div><a class="orderTypeFilter" id="Fax">Fax</a></div>
+                        </div>
+                        <div class="col-md-2 padd-right-0">
+                          <input type="text"
+                          class="form-control"
+                          style=""
+                          name="order_date_range"
+                          id="order_date_range"
+                          placeholder="Date Range">
+                        </div>
+                        {{#if getUserPrivilege}}
+                        <div class="col-md-12 orderDeleteDiv" >
+                          <label class="checkboxContainer" >Select all
+                            <input type="checkbox" id="selectAllOrders">
+                            <span class="checkmark"></span>
+                          </label>
+                          <a class="btn btn-md" id="delete_order">Bulk Delete</a>
+                        </div>
+                        {{/if}}
+                      </div>
+                      <div class="col-md-12 padd-left-0 table-responsive" style="bottom: 50px;">
+                        {{#if session "showLoaderDocMgmt"}}
+                            {{>loadingText}}
+                        {{ /if }}   
+                        {{#if orderSettings}}
+                          {{> reactiveTable collection=collection fields=fields settings=orderSettings}}
+                          <button class="col-md-12" id="loadMoreOrders">Load More</button>
+                         {{ /if }} 
+                      </div>
+                  </div>
+                  <div class="tab-pane settings-modal" id="tab_d">
+                      <p class="contentText">Manage AE Settings</p>
+                      <div class="col-md-12 padd-left-0 padd-right-0 padd-bottom-16">
+                        {{#each pac in pacsData}}
+                          <div class="col-md-3 settingBox {{#if pac.disable}}disabledRow{{/if}}" id="row_{{incremented @index}}">
+                              <div class="col-sm-6 padd-left-0">
+                                <div class="countValue">{{incremented @index}}</div>
+                                <div class="settingSwitch">
+                                  <label class="switch switch-left-right" >
+                                    <input class="switch-input toggleSettingBtn" type="checkbox" id="switch_{{incremented @index}}" {{isChecked pac.disable}}>
+                                    <span class="switch-label" data-on="Enabled" data-off="Disabled"></span> <span class="switch-handle"></span>
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-md-6 padd-right-0">
+                                <a class="cancelShareBtn delPac" id="cancelShareBtn_{{incremented @index}}">X</a>
+                                <a class="editShareBtn editPac" id="editShareBtn_{{incremented @index}}">EDIT</a>
+                                <input type="hidden" name="pacId" value="{{pac.id}}" id="pacid_{{incremented @index}}" >
+                              </div>
+                              <div class="form-group col-sm-12 settingValuediv" >
+                                <label class="from-control-text" >AE Title</label>
+                                <div class="settingValue">{{pac.ae_title}}</div>
+                              </div>
+                              <div class="form-group col-sm-12 settingValuediv" >
+                                <label class="from-control-text" >IP</label>
+                                <div class="settingValue">{{pac.ip}}</div>
+                              </div>
+                              <div class="form-group col-sm-12 settingValuediv" >
+                                <label class="from-control-text" >PORT</label>
+                                <div class="settingValue">{{pac.port}}</div>
+                              </div>
+                              <div class="form-group col-sm-12 settingValuediv" >
+                                <label class="from-control-text" >Common Name</label>
+                                <div class="settingValue">{{pac.common_name}}</div>
+                              </div>
+                              <div class="form-group col-sm-12 settingValuediv" >
+                                <label class="from-control-text" >Type</label>
+                                <div class="settingValue">{{pac.type}}</div>
+                              </div>
+                              <div class="form-group col-sm-12 settingValuediv" >
+                                <label class="from-control-text" >Purge studies interval</label>
+                                <div class="settingValue">{{purgeStudyValue pac.purge_studies}}</div>
+                              </div>
+                          </div>
+                        {{/each}}
+                        <div class="col-md-2 padd-left-0 padd-right-0 addBtnDiv" id="addPacsBtn">
+                          <div class="addBtn">
+                            +
+                          </div>
+                        </div>
+                      </div>
+
+
+                  </div>
+              </div>
+
+            </div>
+          </div>
+        </div><!-- end of container -->
+      </div>
+     
+
+<div id="view-ss-pdf" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="view-ss-pdf" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" id="order-modal-body">
+                <button type="button" class="close closeOrderModal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <iframe style="width: 100%; min-height: 95%; display: inline;" scrolling="no" allowfullscreen="" webkitallowfullscreen="" src=""></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="view-ss-record-pdf" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="view-pdf-title" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-body" id="record-modal-body">
+                  <button type="button" class="close closeReportModal" aria-label="Close"><span>X</span></button>
+                  <h2 class="text-center loadingText" style="display: none;">Loading....</h2>
+                    <iframe style="width: 100%; min-height: 95%; display: inline;" scrolling="no" allowfullscreen="" webkitallowfullscreen="" src=""></iframe>
+              </div>
+          </div>
+      </div>
+</div>
+<div id="view-all-studies" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="view-all-studies" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close dialogClose" aria-label="Close" ><span aria-hidden="true">X</span></button>
+                <h2 class="text-center loadingText" style="display: none;">Loading....</h2>
+                <div><p>You are attempting to access a patient study from outside of your group.  By clicking Confirm, below, you are attesting that the patient or patients you are accessing are now under your care.</p></div>
+                <div>
+                  <button class="filter-buttons" id="confirmBtn">Confirm</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="share-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="share-modal" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+      <div class='modal-content'>
+        <div class="modal-body">
+          <button type="button" class="close shareDialogClose" aria-label="Close"><span aria-hidden="true">X</span></button>
+          <div class="form-group col-sm-12 padd-right-0 modalTitleDiv">
+            <p class="shareImg-title">{{# if reshareCheck }} Reshare Image {{else}}Share Image {{/if}} </p>
+          </div>
+          <div class="form-group col-sm-12">
+              <input type="email" class="form-control from-control-textbox" name="image-share-email" placeholder="Email ID" id="image-share-email">
+          </div>
+          <div class="form-group col-sm-12">
+              <input type="password" class="form-control from-control-textbox" value="" name="image-share-password" autocomplete="new-password" id="image-share-password" placeholder="Password">
+          </div>
+          <div class="form-group col-sm-12">
+            <input type="text" class="form-control from-control-textbox" value="" name="image-share-mobile" id="image-share-mobile" placeholder="Mobile no.">
+            <label class="from-control-text mobileDesc">(Entering a mobile number will automatically send a text with the password)</label>
+
+          </div>
+          <div class="form-group col-sm-12">
+            <label class="from-control-text" style="color: #636669;font-size: 16px;">Notes</label>
+            <textarea class="form-control" rows="8" id="image-share-message" name="image-share-message" placeholder="Your message"></textarea>
+          </div>
+          <div class="form-group col-sm-12">
+            <select name="image-share-duration" id="duration" class="form-control from-control-textbox">
+                <option value="30">30 days</option>
+                <option value="60">60 days</option>
+                <option value="90" selected>90 days</option>
+                <option value="180">6 Months</option>
+                <option value="365">1 Year</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <div class="form-group col-sm-6 padd-left-0">
+              <input type="hidden" name="share_id" id="reshareID" value="">
+              {{# if reshareCheck }}
+                  {{# if disableReshareCancel}}
+                  <button class="btn btn-confirm btn-default form-action modal-left-btn" disabled title="This share was canceled" id="cancelReshare">Cancel </button>
+                  {{ else }}
+                  <button class="btn btn-confirm btn-default form-action modal-left-btn" id="cancelReshare">Cancel </button>
+                  {{/if}}
+              {{else}}
+                <button class="btn btn-confirm btn-default form-action shareDialogClose modal-left-btn">Cancel </button>
+              {{/if}}
+            </div>
+            <div class="form-group col-sm-6 padd-right-0">
+              {{# if reshareCheck }}
+                <button class="btn btn-confirm btn-primary form-action" id="reshare" >Reshare</button>
+              {{else}}
+                <button class="btn btn-confirm btn-primary form-action" id="share" >Share</button>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<div id="settings-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="settings-modal" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog" style="width:50%;">
+      <div class='modal-content'>
+        <div class="modal-body">
+          <button type="button" class="close settingsDialogClose" aria-label="Close"><span aria-hidden="true">X</span></button>
+          <div class="form-group col-sm-12 padd-right-0" style="margin-bottom: 21px;border-bottom: 1px solid #333;">
+            <div class="col-sm-6 padd-left-0"><p class="editSettingHeading">Edit AE Settings - <span class="settingCount" style="color: #707070;">1</span> </p></div>
+            <div class="col-sm-6 padd-right-0">
+              <label class="switch switch-left-right" >
+                <input class="switch-input toggleSettingBtn" type="checkbox" id="toggleSettingBtn" checked>
+                <span class="switch-label" data-on="Enabled" data-off="Disabled"></span> <span class="switch-handle"></span>
+              </label>
+            </div>
+          </div>
+          <div class="form-group col-sm-6">
+              <label class="from-control-text">AE Title</label>
+              <input type="text" class="form-control from-control-textbox" name="setting-ae-title" placeholder="AE Title" id="setting-ae-title">
+          </div>
+          <div class="form-group col-sm-6">
+              <label class="from-control-text" >IP</label>
+              <input type="text" class="form-control from-control-textbox" value="" name="setting-ip" id="setting-ip" placeholder="IP">
+          </div>
+          <div class="form-group col-sm-6">
+            <label class="from-control-text" >Port</label>
+            <input type="text" class="form-control from-control-textbox" value="" name="setting-port" id="setting-port" placeholder="Port">
+          </div>
+          <div class="form-group col-sm-6">
+            <label class="from-control-text" >Common Name</label>
+            <input type="text" class="form-control from-control-textbox" value="" name="setting-name" id="setting-name" placeholder="Common Name">
+          </div>
+          <div class="form-group col-sm-6">
+            <label class="from-control-text" >Type</label>
+            <input type="text" class="form-control from-control-textbox" value="" name="setting-type" id="setting-type" placeholder="Type">
+          </div>
+          <div class="form-group col-sm-6">
+            {{#if settingForm}} 
+            <div class="col-md-8 padd-left-0">           
+              <label class="from-control-text" >Purge studies interval</label>
+              <select name="purge-studies" id="purge-studies" class="form-control from-control-textbox">
+                <option value="30_days" >30 Days</option>
+                <option value="60_days" >60 Days</option>
+                <option value="90_days" selected >90 Days</option>
+                <option value="6_months">6 Months</option>
+                <option value="1_year" >1 Year</option>
+                <option value="never" >Never</option>
+              </select>
+            </div>   
+            <div class="col-md-4 padd-left-0">
+              <label class="from-control-text" >Time Out</label>
+              <input type="text" class="form-control" value="5" id="waitSeconds" placeholder="Wait seconds">
+            </div>        
+            {{ /if }}
+            {{#unless settingForm}}
+            <label class="from-control-text" >Purge studies interval</label>
+            <select name="purge-studies" id="purge-studies" class="form-control from-control-textbox">
+              <option value="30_days" >30 Days</option>
+              <option value="60_days" >60 Days</option>
+              <option value="90_days" selected >90 Days</option>
+              <option value="6_months">6 Months</option>
+              <option value="1_year" >1 Year</option>
+              <option value="never" >Never</option>
+            </select>
+            {{/unless}}
+          </div>
+ 
+          <div class="modal-footer">
+            <input type="hidden" name="pac_id" id="editpacId" value="">
+            <div class="form-group col-sm-6  padd-left-0">
+              {{#if settingForm}}
+              <button class="btn btn-confirm btn-primary form-action updateSettings settingBtn" id="addSetting" ><i class="fa fa-pencil" aria-hidden="true" style="padding-right:1px;"></i> Add Settings</button>
+              {{ /if }}
+              {{#unless settingForm}}
+              <button class="btn btn-confirm btn-primary form-action deleteSettings delPac" id="deleteSetting" ><i class="fa fa-times" aria-hidden="true" style="padding-right:1px;"></i>Delete </button>
+              {{/unless}}
+            </div>
+            <div class="form-group col-sm-6 padd-right-0">
+              {{#unless settingForm}}
+              <button class="btn btn-confirm btn-primary form-action updateSettings settingBtn" id="updateSetting" ><i class="fa fa-pencil" aria-hidden="true" style="padding-right:1px;"></i> Update Settings</button>
+              {{/unless}}
+              {{#if settingForm}}              
+              <button class="btn btn-confirm btn-success form-action" id="pingSetting"><i class="fa fa-pencil" aria-hidden="true" style="padding-right:1px;"></i> Test Connectivity</button>
+              {{ /if }}
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<div id="share-success-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="share-success-modal" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+      <div class='modal-content'>
+        <div class="modal-body">
+          <div class="form-group col-sm-12 padd-right-0" style="text-align:center;">
+            <img class="" src = "/imageviewer/images/tick-circle.png" />
+            <p class="success-heading">{{# if reshareCheck }} Image Reshared! {{else}} Image Shared! {{/if}}</p>
+            <p style="font-size: 16px;color: #fff;">A new share of this image was successfully sent.</p>
+          </div>
+          <div class="shareDetail">
+            <p id="studyPname"></p>
+            <p id="studyDesc"></p>
+            <div>Shared <span id="sharedDate"></span></div>
+            <div>Notification sent to Mobile: <span id="studyMobileNo"></span></div>
+          </div>
+          <div class="modal-footer" style="border-top: 0px;">
+            <div class="form-group col-sm-12 padd-right-0" style="text-align:center;margin-bottom: 0px;">
+              <a id="imageshareOK">OK</a>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<div id="reshare-cancel-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="reshare-cancel-modal" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+      <div class='modal-content'>
+        <div class="modal-body">
+          <div class="form-group col-sm-12 padd-right-0" style="text-align:center;">
+            <img class="" src = "/imageviewer/images/tick-cancel.png" />
+            <p class="success-heading" style="padding-top: 26px;">Cancel Share</p>
+            <p style="font-size: 16px;color: #fff;">Are you sure you want to cancel this share?</p>
+          </div>
+          <div class="shareDetail">
+            <p id="cancelStudyPname"></p>
+            <p id="cancelStudyDesc"></p>
+            <div>Shared <span id="cancelSharedDate"></span></div>
+          </div>
+          <div class="modal-footer" style="border-top: 0px;">
+            <div class="form-group col-sm-12 padd-right-0" style="text-align:center;">
+              <button class="btn btn-confirm btn-danger form-action col-md-8 col-md-offset-2" id="cancelShare" style="text-transform: uppercase;">Cancel Share</button>
+            </div>
+            <div class="form-group col-sm-12 padd-right-0" style="text-align:center;margin-bottom: 0px;">
+              <a id="closepopup">No, don't cancel this share.</a>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<div id="delete-setting-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="delete-setting-modal" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+      <div class='modal-content'>
+        <div class="modal-body">
+          <div class="form-group col-sm-12 padd-right-0" style="text-align:center;">
+            <img class="" src = "/imageviewer/images/tick-cancel.png" />
+            <p class="success-heading" style="padding-top: 26px;">Delete AE</p>
+            <p style="font-size: 16px;color: #fff;">Are you sure you want to cancel this AE?</p>
+          </div>
+
+          <div class="modal-footer" style="border-top: 0px;">
+            <div class="form-group col-sm-12 padd-right-0" style="text-align:center;">
+              <input type="hidden" id="delSetting" value="" >
+              <button class="btn btn-confirm btn-danger form-action col-md-8 col-md-offset-2" id="confirmDeleteSetting" style="text-transform: uppercase;">Delete</button>
+            </div>
+            <div class="form-group col-sm-12 padd-right-0" style="text-align:center;margin-bottom: 0px;">
+              <a id="closeDelSettingpopup">No, don't delete this AE.</a>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="overlay" id="studylistOverlay" style="display:none;"></div>
+
+
+
+
+</template>

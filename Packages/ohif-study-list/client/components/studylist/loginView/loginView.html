@@ -1,0 +1,45 @@
+<template name="loginView">
+  <div class="bgImage">
+    <div class="layer-507">
+      <div class="layer-508">
+        <div class="loginFormContainer">
+          <div class="login">
+            <div id="logoContainer">
+              <img class="loginLogo" src = "/imageviewer/images/ImageViewerLogo-stacked.png" />
+            </div>
+            <form class="form-signin">
+              {{#unless checkShareID}}
+              <input type="text" class="form-control" id="emailAddress" name="emailAddress" placeholder="Email Address" required="" autofocus="" />
+              {{/unless}}
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password" required=""/>
+              <button id="signInButton" class="btn btn-lg btn-primary btn-block save" ><span class="logintxt">LOGIN</span></button>
+              
+              <div class="otheroptions">
+                <label class="checkboxContainer">Remember me
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+                <a href="#" class="forgotpassword">Forgot your password?</a>
+              </div>
+              {{#if session "showLoginLoader"}}
+                {{>loadingText}}
+              {{ /if }}  
+            </form>
+          </div>
+        </div>
+        
+        <div class="footer row navbar-fixed-bottom">
+          <div class="col-md-6 col-sm-6 col-xs-6 footer-left">
+            <p class="powered-by">Powered by</p>
+            <img class="footerLogo" src = "/imageviewer/images/SSCompactHorizontalLogo-White.png" />
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-6 footer-right">
+            <img class="footer-icons" src = "/imageviewer/images/in.png" />
+            <img class="footer-icons" src = "/imageviewer/images/t.png" />
+            <img class="footer-icons" src = "/imageviewer/images/f.png" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

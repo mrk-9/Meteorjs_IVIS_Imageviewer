@@ -1,0 +1,38 @@
+{
+  "servers": {
+    "dicomWeb": [
+      {
+        "name": "Orthanc",
+        "wadoUriRoot": "http://45.33.114.87:8043/wado",
+        "qidoRoot": "http://45.33.114.87:8043/dicom-web",
+        "wadoRoot": "http://45.33.114.87:8043/dicom-web",
+        "qidoSupportsIncludeField": false,
+        "imageRendering": "wadouri",
+        "thumbnailRendering": "wadors",
+        "requestOptions": {
+          "auth": "orthanc:orthanc",
+          "logRequests": true,
+          "logResponses": false,
+          "logTiming": true
+        }
+      }
+    ]
+  },
+  "defaultServiceType": "dicomWeb",
+  "dropCollections": true,
+  "public": {
+    "apiRoot": "https://demo.scriptsender.com/api",
+    "verifyEmail": false,
+	"isProduction": true,
+    "ui": {
+        "studyListFunctionsEnabled": true,
+        "leftSidebarOpen": false,
+        "displaySetNavigationLoopOverSeries": false,
+        "displaySetNavigationMultipleViewports": true,
+        "autoPositionMeasurementsTextCallOuts": "TRLB"
+    }
+  },
+  "proxy": {
+    "enabled": true
+  }
+}

@@ -1,0 +1,18 @@
+<template name="imageViewerViewport">
+    {{>roundedButtonGroup leftSidebarToggleButtonData}}
+    <div class='imageViewerViewport'
+        oncontextmenu='return false;'
+        unselectable='on'
+        onselectstart='return false;'
+        tabindex='0'>
+    </div>
+    <div class="marker_pen_main" style="position: absolute; top: 0%; left: 0%; pointer-events: none; display: hidden;">
+        <canvas class="markerPenCanvas" height="893" width="1920" style="opacity: 0.7;"></canvas>
+    </div>
+    <div class='viewportInstructions'>
+        Please drag a stack here to view images.
+    </div>
+    {{>viewportOverlay}}
+    {{>loadingIndicator}}
+    {{>viewportOrientationMarkers}}
+</template>

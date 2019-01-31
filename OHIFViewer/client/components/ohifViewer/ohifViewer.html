@@ -1,0 +1,14 @@
+<template name="ohifViewer">
+    {{#header}}
+        {{#section 'brand'}}
+            <!-- <a class="logo-text">STUDY LIST</a> -->
+        {{/section}}
+        {{#section 'headerMenu'}}
+            <div class="logo-image">
+                <img src = "/imageviewer/images/ImageViewerLogo.png" class="imageviewerlogoimage" />
+            </div>
+        {{/section}}
+    {{/header}}
+
+    {{>Template.dynamic template=(choose this.template 'studylist') data=this}}
+</template>

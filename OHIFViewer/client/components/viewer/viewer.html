@@ -1,0 +1,23 @@
+<template name="viewer">
+    {{#if and Template.subscriptionsReady}}
+        <div class="viewerDialogs">
+            {{>cineDialog}}
+            {{>shareDialog}}
+			{{>metadataDialog}}
+            {{>reportDialog}}
+            {{>layoutChooser}}
+            {{>annotationDialogs}}
+            {{>contextMenu}}
+            <!-- Hanging Protocol dialogs -->
+            {{>ruleEntryDialog}}
+            {{>settingEntryDialog}}
+            {{>textEntryDialog}}
+        </div>
+        <div id="viewer">
+            {{>toolbarSection (clone this state=state)}}
+            {{>flexboxLayout (clone this state=state)}}
+        </div>
+    {{else}}
+        {{>loadingText}}
+    {{/if}}
+</template>

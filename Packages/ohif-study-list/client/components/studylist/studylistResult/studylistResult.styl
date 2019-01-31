@@ -1,0 +1,1803 @@
+@import "{ohif:design}/app"
+
+$tableHoverColor = #2c363f
+$tableTextPrimaryColor = white
+$tableTextSecondaryColor = #91b9cd
+
+$inputBackgroundColor = #2c363f
+$inputPlaceholderColor = lightgray
+
+$studyListToolbarHeight = 75px
+$bodyCellHeight = 40px
+
+.studyListToolbar
+  theme('background', '$uiGrayDarker')
+  height: $studyListToolbarHeight
+  margin-bottom: 2px
+  padding: 0 $studyListPadding
+
+  &>div
+    display: inline-block
+
+  .header
+    font-size: 22px
+    font-weight: 300
+    color: $tableTextSecondaryColor
+    line-height: $studyListToolbarHeight
+
+  .studylistToolbar
+    height: $studyListToolbarHeight
+    line-height: $studyListToolbarHeight
+
+  .studyCount
+    theme('color', '$largeNumbersColor')
+    font-size: 40px
+    font-weight: 100
+    line-height: $studyListToolbarHeight
+
+.theadBackground
+  height: 178px
+  position: absolute
+  width: 100%
+
+  &:before, &:after
+    content: ''
+    display: block
+    left: 0
+    position: absolute
+    width: 100%
+
+  &:before
+    theme('background-color', '$uiGrayDarker')
+    height: 100%
+    top: 0
+    z-index: 1
+
+  &:after
+    theme('background-color', '$largeNumbersColor')
+    bottom: -1px
+    height: 1px
+    z-index: 3
+
+#studyListContainer
+  width: 100%
+  z-index: 2
+
+  .loadingTextDiv
+    color: $tableTextSecondaryColor
+    font-size: 30px
+
+  .notFound
+    color: $tableTextSecondaryColor
+    font-size: 30px
+    font-weight: 200
+    text-align: center
+
+  table#tblStudyList
+    tr
+      height: 20px
+
+    thead
+      white-space: nowrap
+
+      tr
+        th
+          padding: 0
+          border-bottom: solid 1px #6fbde2
+
+
+          &:first-child
+            padding-left: $tablePadding
+
+          &:last-child
+            padding-right: $tablePadding
+
+          div.sortingCell
+            display: inline-block
+            cursor: pointer
+            width: 100%
+            min-width: 95px
+            margin: 0 auto
+            color: $tableTextPrimaryColor
+            font-weight: 400
+            padding: 20px 6px
+
+            span
+              font-size: 15px
+              float: left
+
+            i
+              margin: 0 5px
+
+            &:hover
+              theme('color', '$activeColor')
+
+            &.active, &:active
+              theme('color', '$activeColor')
+
+          input.studylist-search
+            height: 32px !important
+            margin: 0 5px 20px 5px
+            padding: 0 20px
+            cursor: pointer
+            border: none !important
+            background-color: #333333 !important
+            color: $inputPlaceholderColor !important
+            font-size: 10pt
+            font-weight: normal
+            width: calc(100% - 10px)
+            border-radius: 0px
+            box-sizing: border-box
+            opacity: 0.67
+
+            transition(all 0.15s ease)
+
+
+            &.invisible
+              visibility: hidden
+
+            &:active, &:hover
+              background-color: #333333
+
+      ::-webkit-datetime-edit-year-field:not([aria-valuenow]),
+      ::-webkit-datetime-edit-month-field:not([aria-valuenow]),
+      ::-webkit-datetime-edit-day-field:not([aria-valuenow])
+        color: transparent
+
+    tbody
+      tr
+        padding: 5px
+        background-color: black
+
+        &:nth-child(even)
+          theme('background-color', '$uiGrayDarker')
+
+        td
+          height: $bodyCellHeight
+          line-height: $bodyCellHeight
+          color: $tableTextPrimaryColor
+          font-weight: 300
+          border-top: 1px solid #436270
+          border-bottom: 1px solid #436270
+          white-space: nowrap
+          transition(all 0.1s ease)
+
+        &:hover, &:active, &.active
+          background-color: $tableHoverColor
+          color: white
+
+          td
+            // This selector is necessary to override bootstrap's 'table' class
+            border-top: 1px solid #436270
+            border-bottom: 1px solid #436270
+            background-color: $tableHoverColor
+
+@media only screen and (max-width: 1362px)
+  $tablePadding = 5%
+
+  #studyListContainer
+    padding: 0 $tablePadding
+
+    table#tblStudyList
+      thead,
+      tbody
+        tr
+          th,
+          td
+            &:first-child
+              padding-left: $tablePadding
+
+            &:last-child
+              padding-right: $tablePadding
+
+@media only screen and (max-width: 1161px)
+  $tablePadding = 3%
+
+  #studyListContainer
+    padding: 0 $tablePadding
+
+    table#tblStudyList
+      thead,
+      tbody
+        tr
+          th,
+          td
+            &:first-child
+              padding-left: $tablePadding
+
+            &:last-child
+              padding-right: $tablePadding
+
+@media only screen and (max-width: 1069px)
+  $tablePaddingMediumScreen = 5px
+
+  .theadBackground
+    height: 101px
+
+  .studyListToolbar
+    padding: 0 $tablePaddingMediumScreen
+
+  #studyListContainer
+    padding: 0
+
+    table#tblStudyList
+      thead > tr > th
+
+        &:first-child
+          padding-left: $tablePaddingMediumScreen
+
+        &:last-child
+          padding-right: $tablePaddingMediumScreen
+
+        input.worklist-search
+          padding: 10px
+
+        div.sortingCell
+          padding: 10px 5px
+
+          i
+            width: auto
+
+      tbody > tr > td
+        &:first-child
+          padding-left: $tablePaddingMediumScreen
+
+        &:last-child
+          padding-right: $tablePaddingMediumScreen
+
+    .worklistPagination
+      .row
+        margin-left: 0
+        margin-right: 0
+
+@media only screen and (max-width: 1069px)
+  .studylist-pagination > .row
+    margin-right: 0;
+
+.filter-buttons{
+  margin: 10px 0px;
+  font-size: 13px;
+  background-color: #2c363f;
+  padding: 6px 7px;
+  border:1px #414d58 solid;
+  webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+
+ul{
+  display: block;
+}
+
+.date-filters input[type="radio"] {
+  margin: 4px 12px 4px 5px;
+}
+
+.date-filters .div-65{
+   width: 65px !important;
+   display: inline-block;
+}
+
+.date-filters div{
+   width: 106px;
+   display: inline-block;
+}
+
+.daterangepicker {
+  background: #000 !important;
+  border: 1px solid #6fbde2;
+}
+
+.range_inputs .btn-success {
+  background-color: #6fbde2;
+  border-color: #6fbde2;
+}
+
+.daterangepicker .calendar-date {
+  background: #2c363f;
+  color: #ffffff;
+  border: 1px solid #6bb6da;
+}
+
+.daterangepicker td.off {
+  color: #999;
+  background: #404b54;
+}
+
+.daterangepicker td.available:hover, .daterangepicker th.available:hover {
+  background: #6a7782;
+}
+
+.range_inputs .btn-success:hover {
+  background-color: #6fbde2;
+  border-color: #6fbde2;
+}
+
+.daterangepicker .ranges .input-mini{
+  background: #2c363f;
+  color: #ffffff;
+}
+
+.daterangepicker td.in-range {
+  background: #404b54;
+}
+
+.daterangepicker td.off, .daterangepicker td.off.in-range {
+  color: #999;
+  background: #5d6267;
+}
+.overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0,0,0,0.67);
+  z-index: 9;
+  top: 0px;
+}
+#view-all-studies
+{
+    top: 30%;
+}
+
+.fieldheight {
+  height: 28px;
+}
+.from-control-textbox::-webkit-input-placeholder {
+  color: #4a4a48f2;
+}
+.from-control-textbox::-moz-placeholder { /* Firefox 19+ */
+  color: #4a4a48f2;
+}
+.from-control-textbox:-ms-input-placeholder { /* IE 10+ */
+  color: #4a4a48f2;
+}
+.from-control-textbox:-moz-placeholder { /* Firefox 18- */
+  color: #4a4a48f2;
+}
+.settingImg
+{
+  width: 36px;
+  bottom: 6px;
+  position: relative;
+}
+.imgShare
+{
+  width: 32px;
+  bottom: 3px;
+  position: relative;
+}
+.disabledRow
+{
+  color: #6bb9cd87;
+  opacity: 0.4;
+}
+.disabledRow a.editShareBtn
+{
+   pointer-events: none;
+   color: #e1e1e1;
+}
+.pagination {
+  width: auto;
+}
+#record-modal-body, #order-modal-body {
+  height: 812px !important;
+  overflow: hidden !important;
+}
+.imageShare-modal .table-striped > tbody > tr:nth-of-type(odd), .order-modal .table-striped > tbody > tr:nth-of-type(odd)
+{
+      background-color: #000000;
+}
+.imageShare-modal .table-hover > tbody > tr:hover, .order-modal .table-hover > tbody > tr:hover {
+  background-color: #2c363f;
+}
+.activeControls button
+{
+  padding: 3px 4px;
+  margin-right: 5px;
+}
+.image-share-duration
+{
+  padding: 0px 8px;
+  height: 26px;
+  width: 87%;
+  margin-top: 8px;
+  background: #333333;
+  border: none;
+  color: #fff;
+}
+
+body {
+    background-color: #000000 !important;
+    background: black !important;
+}
+.header {
+  height: 108px;
+}
+body>.header .header-menu .logo-image img.imageviewerlogoimage {
+  height: 65px;
+  width: 267px;
+}
+.studyContainer {
+  width: 90%;
+  margin: 0 auto;
+  background-color: #141E28;
+  margin-top: 18px;
+}
+.study-list-wrapper .studyListToolbar {
+  padding: 0 37px;
+  background-color: #141E28;
+}
+.desktopView .studyContainer ul{
+  z-index:1  
+  padding:15px !important
+  list-style-type:none
+}
+.studyContainer ul.nav {
+  border: unset !important;
+  background: none !important;
+  width: unset !important;
+  float: right;
+  position: relative;
+  bottom: 70px;
+  padding-bottom: 0px !important;
+  padding-right: 0px !important;
+}
+.studyContainer ul.nav li
+{
+  background-color: #333333;
+  background: linear-gradient(270deg, #000000 0%, #252525 100%);
+}
+.studyContainer ul.nav li.active {
+  background-color: #141E28;
+	background: linear-gradient(#141e28, #083051);
+}
+.studyContainer .nav-tabs > li.active > a, .studyContainer .nav-tabs > li.active > a:hover, .studyContainer .nav-tabs > li.active > a:focus {
+  background-color: #141E28;
+  background: linear-gradient(270deg, #141E28 0%, #083051 100%);
+  border: none;
+  color: #FFFFFF;
+}
+.studyContainer ul.nav li a {
+  padding: 15px 27px;
+  font-family: "Source Sans Pro";
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0.7;
+  color: #6D6E71;
+  text-transform: uppercase;
+}
+.studyContainer .nav-tabs > li > a:hover {
+  border: none;
+  background-color: unset;
+}
+.contentDiv
+{
+  padding: 5px 17px;
+  position: absolute;
+  background-color: #141e28;
+  width: 90%;
+  margin: 0 auto;
+}
+.contentText {
+  color: #1B75BC;
+  font-family: "Source Sans Pro";
+  font-size: 27px;
+  font-weight: bold;
+}
+.filters div {
+  display: inline-block;
+  margin-right: 6px;
+  background-color: #333;    
+  border: 1px solid #333;
+  border-radius: 15px;  
+  padding: 4px 7px;
+}
+.filters .daterangeBtn, .filters .imageShareAll, .filters .orderTypeFilter {
+  font-family: "Source Sans Pro";
+  font-size: 13px;
+  font-weight: bold;
+  color: #6D6E71;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.padd-left-0 {
+    padding-left: 0px;
+}
+.padd-right-0 {
+    padding-right: 0px;
+}
+
+.daterangeBtn:hover {
+  text-decoration: none;
+}
+.desktopView .filters {
+  border-right: 1px solid #6D6E71;
+  margin-top: 12px;
+  display: inline-block;
+  float: left;
+}
+#filterDateRange, #shareDateRange, #order_date_range {
+  background-color: #333333 !important;
+  opacity: 0.5;
+  margin-top: 11px;
+  border: none !important;
+  height: 34px !important;
+  border-radius: 4px !important;
+}
+#studyCount {
+  margin-top: 6px;
+  height: 44px;
+  padding: 2px;
+  text-align: center;
+  font-size: 33px;
+  color: #1B75BC;
+  font-weight: bold;
+  background-color: #333333 !important;
+  border: none !important;
+  cursor: pointer;
+  border-radius: 4px !important;
+}
+.studyCountText
+{
+  margin-top: 16px;
+  color: #6D6E71;
+  font-family: "Source Sans Pro";
+  font-size: 17px;
+  font-weight: bold;
+}
+#studyListContainer table#tblStudyList thead tr th div.sortingCell span {
+  font-family: "Source Sans Pro";
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+#studyListContainer table#tblStudyList tbody tr td.patientName {
+  color: #009ED9;
+  font-family: "Source Sans Pro";
+  font-size: 15px;
+  font-weight: bold;
+}
+.imageShare-modal table tbody tr td {
+  height: 40px;
+  line-height: 40px;
+  color: #fff;
+  font-weight: 300;
+  border-top: 1px solid #436270;
+  border-bottom: 1px solid #436270;
+  white-space: nowrap;
+  -webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease;
+  -ms-transition: all 0.1s ease;
+  -o-transition: all 0.1s ease;
+  transition: all 0.1s ease;
+  padding: 8px;
+}
+.imageShare-modal table thead tr th
+{
+  color: #FFFFFF;
+  font-family: "Source Sans Pro";
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.shareImg-title
+{
+  color: #00aeef;
+  font-family: "Source Sans Pro";
+  font-size: 17px;
+  font-weight: bold;
+  text-align: center;
+}
+.share-cancel-button, .share-cancel-button:hover {
+  background: none !important;
+  border: none;
+}
+.order-modal .table > tbody > tr > td {
+    border-top: 1px solid #344a61;
+    color: #ffffff;
+}
+.order-modal .table > thead > tr > th {
+  text-transform: uppercase;
+}
+.order-modal .orderDeleteDiv
+{
+  height: 50px;
+  background: #23282d;
+  border-top: 1px solid #35393e;
+  border-bottom: 1px solid #35393e;
+  margin-bottom: 15px;
+  margin-top: 11px;
+}
+.order-modal .orderDeleteDiv .checkboxContainer
+{
+  margin-top: 15px;
+  color: #636363;
+}
+.order-modal .orderDeleteDiv .checkmark {
+  border: 1px solid #636363;
+}
+.order-modal #delete_order
+{
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-radius: 0px;
+  background-color: #1B75BC;
+  padding: 4px 6px;
+  margin-left: 32px;
+  margin-bottom: 7px;
+  border: none;
+}
+#settings-modal .form-control {
+  border: 1px solid #000000;
+	background-color: #24292E;
+  color: #A0A09F;
+	font-family: "Source Sans Pro";
+	font-size: 17px;
+  height: 55px;
+  border-radius: 0px;
+}
+.settings-modal .tile-background
+{
+  border: 1px solid #333333;
+  background-color: #000000;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+#settings-modal .from-control-text
+{
+  font-weight: normal;
+  text-transform: uppercase;
+  color: #6D6E71;
+	font-family: "Source Sans Pro";
+	font-size: 16px;
+	font-weight: bold;
+}
+#settings-modal .form-group
+{
+
+}
+.settings-modal .countValue {
+  color: #A0A09F;
+	font-family: "Source Sans Pro";
+	font-size: 35px;
+	font-weight: bold;
+  margin-bottom: 0px;
+  display: inline;
+  padding-right: 10px;
+}
+.settings-modal .editShareBtn {
+    border: 1px solid #337ab7;
+    float: right;
+    height: 22px;
+    width: 42px;
+    text-align: center;
+    color: #337ab7;
+    margin-top: 13px;
+    cursor: pointer;
+    font-size: 11px;
+    margin-right: 10px;
+    font-weight: bolder;
+    padding: 3px;
+}
+.settings-modal .editShareBtn:hover, .settings-modal .cancelShareBtn:hover {
+  text-decoration:none;
+}
+.settings-modal .cancelShareBtn {
+  	border: 1px solid #D5565B;
+    float: right;
+    height: 22px;
+    width: 22px;
+    text-align: center;
+    color: #d5565b;
+    margin-top: 13px;
+    cursor: pointer;
+}
+.settings-modal .addBtn {
+    float: right;
+    width: 100%;
+    border: 1px solid #333;
+    background-color: #000;
+    background: linear-gradient(270deg, #141e28 0%, #083051 100%);
+    font-size: 107px;
+    text-align: center;
+    font-weight: bolder;
+    color: #1F4F75;
+}
+.settings-modal .addBtnDiv
+{
+  width: 13%;
+  padding-right: 0px;
+  cursor: pointer;
+}
+.settings-modal .settingBtn
+{
+    width: 100%;
+    border-radius: 0px;
+}
+.settingBox label, #settings-modal label{
+    font-weight: inherit;
+}
+.settingBox .switch, #settings-modal .switch {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 80px;
+    height: 23px;
+    padding: 3px;
+    margin: 7px 10px 10px 0;
+    border-radius: 18px;
+    cursor: pointer;
+    box-sizing: content-box;
+    float: right;
+}
+
+.settingBox input[type=checkbox], .settingBox input[type=radio], .settings-modal input[type=checkbox], .settings-modal input[type=radio] {
+    margin: 4px 0 0;
+    line-height: normal;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.tile-background label {
+    font-weight: inherit;
+}
+.tile-background .switch {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 80px;
+    height: 27px;
+    padding: 3px;
+    margin: 7px 10px 10px 0;
+    border-radius: 18px;
+    cursor: pointer;
+    box-sizing: content-box;
+    float: right;
+}
+
+.tile-background input[type=checkbox], .tile-background input[type=radio] {
+    margin: 4px 0 0;
+    line-height: normal;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+
+.switch-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    box-sizing: content-box;
+}
+.switch-left-right .switch-input:checked ~ .switch-label {
+    background: inherit;
+}
+.switch-input:checked ~ .switch-label {
+    background: #E1B42B;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
+}
+.switch-left-right .switch-label {
+    overflow: hidden;
+}
+.switch-label, .switch-handle {
+    transition: All 0.3s ease;
+    -webkit-transition: All 0.3s ease;
+    -moz-transition: All 0.3s ease;
+    -o-transition: All 0.3s ease;
+}
+.switch-label {
+    position: relative;
+    display: block;
+    height: inherit;
+    font-size: 10px;
+    text-transform: uppercase;
+    background: #eceeef;
+    border-radius: inherit;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.15);
+    box-sizing: content-box;
+}
+.switch-left-right .switch-input:checked ~ .switch-label:before {
+    opacity: 1;
+    left: 100px;
+}
+.switch-input:checked ~ .switch-label:before {
+    opacity: 0;
+}
+.switch-left-right .switch-label:before {
+    background: #707070;
+    text-align: left;
+    padding-left: 80px!important;
+}
+.switch-left-right .switch-label:before, .switch-left-right .switch-label:after {
+    width: 20px;
+    height: 13px;
+    top: 4px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 8px 0 0 0;
+    border-radius: 20px;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.2), inset 0 0 3px rgba(0, 0, 0, 0.1);
+}
+.switch-left-right .switch-label:before
+{
+    text-indent: -51px;
+}
+.switch-left-right .switch-label:after
+{
+  text-indent: -11px;
+}
+.switch-label:before {
+    content: attr(data-off);
+    right: 11px;
+    color: #aaaaaa;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+}
+
+span.switch-label:after {
+    content: attr(data-on);
+    left: 11px;
+    color: #FFFFFF;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+    position: absolute;
+
+}
+
+.switch-label:before, .switch-label:after {
+    position: absolute;
+    top: 50%;
+    margin-top: -5px;
+    line-height: 1;
+    -webkit-transition: inherit;
+    -moz-transition: inherit;
+    -o-transition: inherit;
+    transition: inherit;
+    box-sizing: content-box;
+}
+
+.switch-left-right .switch-input:checked ~ .switch-label:after {
+    left: 0!important;
+    opacity: 1;
+    padding-left: 20px;
+}
+
+
+.switch-input:checked ~ .switch-label:after {
+    opacity: 1;
+}
+
+
+.switch-left-right .switch-label:after {
+    text-align: left;
+    background: #4FD262!important;
+    left: -100px!important;
+    opacity: 1;
+    width: 100%!important;
+
+}
+.switch-left-right .switch-label:before, .switch-left-right .switch-label:after {
+    width: 20px;
+    height: 20px;
+    top: 4px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 8px 0 0 0;
+    border-radius: 20px;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.2), inset 0 0 3px rgba(0, 0, 0, 0.1);
+}
+.switch-input:checked ~ .switch-handle {
+    left: 60px;
+    box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+.switch-label, .switch-handle {
+    transition: All 0.3s ease;
+    -webkit-transition: All 0.3s ease;
+    -moz-transition: All 0.3s ease;
+    -o-transition: All 0.3s ease;
+}
+
+.switch-handle {
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    width: 23px;
+    height: 23px;
+    background: linear-gradient(to bottom, #FFFFFF 40%, #f0f0f0);
+    background-image: -webkit-linear-gradient(top, #FFFFFF 40%, #f0f0f0);
+    border-radius: 100%;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.switch-handle:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -6px 0 0 -6px;
+    width: 12px;
+    height: 12px;
+    background: linear-gradient(to bottom, #eeeeee, #FFFFFF);
+    background-image: -webkit-linear-gradient(top, #eeeeee, #FFFFFF);
+    border-radius: 6px;
+    box-shadow: inset 0 1px rgba(0, 0, 0, 0.02);
+}
+.disabledRow button {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+.settingBox
+{
+	border: 1px solid #333333;
+  background-color: #000000;
+  width: 23%;
+  margin-right: 33px;
+  border-radius: 0px;
+  margin-bottom: 15px;
+}
+.settingBox .settingValuediv
+{
+  border-top: 1px solid #333;
+  padding: 6px 0px;
+  margin-bottom: 0px;
+}
+.settingValue
+{
+  color: #6d6e71;
+}
+.settingSwitch {
+  display: inline-flex;
+}
+#settings-modal .modal-content, #share-modal .modal-content, #shareDialog .modal-content{
+  border-radius: 0px;
+  border-color: #333;
+}
+#settings-modal .modal-footer, #share-modal .modal-footer, #shareDialog .modal-footer {
+  border-top: none;
+}
+#settings-modal .editSettingHeading,  #share-modal .shareImg-title, #shareDialog .shareImg-title{
+  font-size: 22px;
+  font-weight: bolder;
+  color: #00aeef;
+}
+#settings-modal .form-action, #share-modal .form-action, #shareDialog .form-action
+{
+  font-size: 17px;
+  height: 55px;
+  font-family: "Source Sans Pro";
+  width : 100%;
+  border-radius: 0px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bolder;
+}
+#settings-modal .deleteSettings
+{
+  background: #000;
+  color: #941b1b;
+  border-color: #941b1b;
+}
+#settings-modal .modal-dialog, #share-modal .modal-dialog, #shareDialog .modal-dialog {
+  width: 45%;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+#settings-modal .switch-left-right .switch-label:before,#settings-modal .switch-left-right .switch-label:after {
+      height: 24px;
+      padding: 11px 0 0 0;
+}
+#settings-modal .switch {
+      height: 30px;
+}
+#settings-modal .switch-handle {
+      top: 4px;
+      width: 27px;
+      height: 27px
+}
+#settings-modal .switch-input:checked ~ .switch-handle {
+      left: 55px;
+}
+#settings-modal .switch-left-right .switch-label:after {
+      text-indent: 4px;
+}
+.pdfPath input[type=checkbox] {
+  visibility: visible;
+}
+.ssPDF.disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.daterangepicker_start_input, .daterangepicker_end_input {
+  display: none;
+}
+.range_inputs .cancelBtn {
+  display: none;
+}
+.daterangepicker .calendar-date,  .daterangepicker .calendar-date {
+  border:none;
+}
+.daterangepicker .ranges {
+  width: unset;
+  float: unset;
+}
+.daterangepicker.opensright .ranges {
+  float: unset;
+}
+.range_inputs .btn-success {
+  width: 99%;
+  border-radius: 0px;
+  background-color: #00aeef;
+  border-color: #00aeef;
+  line-height: 2.5;
+}
+.daterangepicker .calendar-date {
+  background: #000000;
+}
+.daterangepicker .calendar th, .daterangepicker .calendar td {
+  color: #6D6E71;
+  font-weight: 100;
+  font-size: 11px;
+
+}
+.daterangepicker .calendar td.in-range, .daterangepicker .calendar td.active {
+  color: #ffffff;
+}
+.daterangepicker td.off, .daterangepicker td.off.in-range, .daterangepicker td.off.start-date, .daterangepicker td.off.end-date
+{
+  background: #5d6267;
+}
+.daterangepicker .calendar th {
+    color: #00aeef;
+}
+.daterangepicker td.active, .daterangepicker td.active:hover {
+  background-color: #00aeef;
+  border-color: #00aeef;
+}
+.daterangepicker .calendar td.active {
+  border-radius: 17px;
+}
+#share-modal .from-control-textbox, #shareDialog .from-control-textbox {
+      background-color: #333;
+      border: none;
+      border-radius: 0px;
+      height: 40px;
+      color:  #ccc;
+}
+#image-share-message {
+  background-color: #333;
+  border: none;
+  border-radius: 0px;
+  color:  #ccc;
+}
+.success-heading
+{
+  font-size: 20px;
+  color: #00aeef;
+  font-weight: 600;
+}
+#imageshareOK, #imageshareOK:hover {
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+}
+#closepopup,#closepopup:hover, #closeDelSettingpopup, #closeDelSettingpopup:hover
+{
+  font-style: italic;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.shareDetail {
+  text-align: center;
+  color: #fff;
+  font-weight: 200;
+}
+.shareDetail p {
+  margin-bottom: 2px;
+}
+#studyPname, #cancelStudyPname
+{
+  font-size: 16px;
+  font-weight: 600;
+  color: #00aed8;
+}
+#sharedDate, #studyMobileNo, #cancelSharedDate {
+  color: #00aed8;
+}
+.imageShare-modal .reactive-table-options {
+  clear: both;
+}
+.imageShare-modal .reactive-table-filter {
+  clear: both;
+  float: left;
+}
+.imageShare-modal .input-group-addon {
+  display: none;
+}
+.imageShare-modal .reactive-table-input {
+  border-radius: 0px;
+  background: #23282d;
+  border: none;
+  color: #ccc;
+}
+.imageShare-modal #reactive-table-3-filter
+{
+  bottom: 50px;
+}
+.order-modal .reactive-table-options {
+
+}
+.order-modal .reactive-table-filter {
+  clear: both;
+  float: left !important;
+}
+.order-modal .input-group-addon {
+  display: none;
+}
+.order-modal .reactive-table-input {
+  border-radius: 0px;
+  background: #23282d;
+  border: none;
+  color: #ccc;
+}
+.order-modal #reactive-table-4-filter
+{
+  clear: both;
+  bottom: 50px;
+}
+.imageShare-modal .reactive-table-navigation, .order-modal .reactive-table-navigation
+{
+  display: none;
+}
+.order-modal .reactive-table, .imageShare-modal .reactive-table {
+  margin-bottom: 0px;
+}
+#loadMoreImageShare, #loadMoreOrders, #loadOrderDataMobile, #loadImageShareMobile
+{
+  background-color: #0C2B45;
+  box-shadow: unset;
+  border: none;
+  height: 54px;
+  font-size: 16px;
+  text-transform: uppercase;
+  opacity: 0.67;
+}
+#loadOrderDataMobile, #loadImageShareMobile {
+  width: 100%;
+}
+.imageShare-modal .activeControls button {
+  padding: 0px !important;
+
+}
+.imageShare-modal .activeControls .toolbarSectionButton {
+  padding: 0px !important;
+}
+.studyContainer ul.nav li.logoutTab {
+  background-color: unset;
+  background: none;
+}
+.studyContainer ul.nav li.logoutTab a
+{
+  color: #00aeef;
+  cursor: pointer;
+}
+.nav-tabs .border-top-left-radius-10 {
+  border-top-left-radius: 10px;
+}
+.hrLine {
+  width: 100%;
+  border-top: 1px solid #3c454e;
+  margin-bottom: 0px;
+}
+.tab-pane .padd-bottom-16 {
+  padding-bottom: 16px;
+}
+#share-modal .mobileDesc, #shareDialog .mobileDesc {
+  color: #9a9a9a;
+  font-weight: normal;
+  font-style: italic;
+}
+.modalTitleDiv {
+  margin-bottom: 21px;
+  border-bottom: 1px solid #333;
+  text-align:center;
+  margin-top: 10px;
+}
+#share-modal .modal-left-btn, #shareDialog .modal-left-btn {
+  background: #5d5f61;
+  border:none;
+  color: #fff;
+}
+.mobileView {
+    display: none;
+  }       
+  .desktopView {
+    display: block;
+  }
+
+#settings-modal.modal, #share-modal.modal,  #shareDialog.modal {
+    overflow: auto;
+}
+/** mobile view css start **/
+@media only screen and (max-width: 480px) {
+  
+}
+/* smartphones, iPhone, portrait 480x320 phones */
+@media (min-width:320px)  {
+  .mobileView {
+    display: block;
+  }       
+  .desktopView {
+    display: none;
+  }
+  #settings-modal .modal-dialog, #share-modal .modal-dialog, #shareDialog .modal-dialog {
+    width: 80%;
+  }
+  body>.header .header-menu .logo-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;    
+    right: 0;
+    background-color: #000000;
+    overflow-x: hidden;
+    transition: 0.5s;    
+  }
+  .sidenav .closeSideNav {
+    text-align: right;
+    color: #1b75bc;
+    padding: 0px;
+    padding-right: 10px;
+    font-size: 23px;
+  }
+  .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;      
+      text-transform: uppercase;
+      font-weight: bolder;
+  }
+  #sidenav a.active {
+    color: #fff;
+  }
+  .sidenav a:hover {
+      color: #f1f1f1;
+  }
+  .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+  }
+  .mobileView .studyContainer {
+    width: 100%;
+    padding-top: 10px;
+    background-color: #0C1823;
+  }
+  .mobileView .studyContainer .navIcon {
+    font-size: 20px;
+    cursor: pointer;
+    float: right;
+    color: #116aaf;
+  }
+  .mobileView .contentText {
+    font-size: 21px;
+  }
+  .mobileView .filters {
+    border-right: unset;
+    margin-top: 10px;
+    padding: 0px 32px;
+    text-align: center;
+  }
+  .mobileView .filters div {
+    padding: 2px 13px;
+    margin-top: 7px;
+  }
+  .mobileView .filters .filterBox a {
+    font-size: 13px;
+    font-weight: bold;
+    color: #6d6e71;
+  }
+  .mobileView .searchDiv {
+    background: #000000;
+    margin-top: 10px;
+    border-radius: 5px;
+    display: none;
+  }
+  .mobileView .searchDiv input, .mobileView .searchDiv select {
+    background-color: #333333 !important;    
+    margin-top: 11px;
+    border: none !important;
+    height: 34px !important;
+    border-radius: 4px !important;
+    font-size: 13px;    
+    font-weight: 700;
+    width: 98%;
+    padding-left: 5px;
+  }
+  .mobileView .searchDiv select {
+    text-transform: uppercase;
+    text-transform: uppercase;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;    
+    background: url(../images/down-arrow.png) #333333 no-repeat calc(100% - 10px) !important;
+    border-radius: 19px;
+    padding: 7px;
+    height: 29px !important;
+  }
+  .mobileView .searchDiv .width-50 {
+    width: 49%;
+    display: inline-block;
+  }
+  .mobileView .searchDiv #studySearch {
+    width: 100%;
+    margin-top: 10px;
+    padding: 21px;
+    background-color: #009FDA;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    font-size: 17px;
+    font-weight: 500;
+  }
+  .mobileView #mstudyCount
+  {
+    margin-top: 6px;
+    height: 44px;
+    padding: 5px;
+    text-align: center;
+    font-size: 33px;
+    color: #1b75bc;
+    font-weight: bold;
+    background-color: #333 !important;
+    border: none !important;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+  .margin-top-10 {
+    margin-top: 10px;
+  }
+  .mobileView .table.studylistStudy > tbody > tr > td, .mobileView .table.imageShareList > tbody > tr > td, .mobileView .table.orderMgmtList > tbody > tr > td {
+    border-top: 1px solid #333;
+  }
+  .mobileView .hrLine {
+    border-top: 2px solid #00aeef;
+  }
+  .studylistStudy .textUpper, .imageShareList .textUpper, .orderMgmtList .textUpper{
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .studylistStudy .pname, .imageShareList .sname, .orderMgmtList .opname
+  {
+    font-weight: bold;
+    color: #00aeef;
+  }
+  .mobileView .studylistStudy .studyAction, .mobileView .imageShareList .studyAction, .mobileView .orderMgmtList .studyAction
+  {
+    text-align: right;
+    padding-top: 15px;
+    padding-bottom: 0px;    
+  }
+  .mobileView .studylistStudy, .mobileView .imageShareList,  .mobileView .orderMgmtList{
+    margin-bottom: 0px;
+  }  
+  .mobileView .studyListContainer .hrLine, .mobileView #imageShareSection .hrLine, .mobileView #orderMgmtSection .hrLine {
+    margin-top: 0px;
+  }
+  .mobileView table:nth-of-type(odd) {
+    background-color: #0c1823;
+  }
+  .mobileView table:nth-of-type(even) {
+    background-color: #000000;
+  }
+  
+}
+/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+@media (min-width:481px)  {
+  .mobileView {
+    display: block;
+  }       
+  .desktopView {
+    display: none;
+  }
+  #settings-modal .modal-dialog, #share-modal .modal-dialog, #shareDialog .modal-dialog {
+    width: 80%;
+  }
+  body>.header .header-menu .logo-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;    
+    right: 0;
+    background-color: #000000;
+    overflow-x: hidden;
+    transition: 0.5s;    
+  }
+  .sidenav .closeSideNav {
+    text-align: right;
+    color: #1b75bc;
+    padding: 0px;
+    padding-right: 10px;
+    font-size: 23px;
+  }
+  .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;      
+      text-transform: uppercase;
+      font-weight: bolder;
+  }
+  #sidenav a.active {
+    color: #fff;
+  }
+  .sidenav a:hover {
+      color: #f1f1f1;
+  }
+  .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+  }
+  .mobileView .studyContainer {
+    width: 100%;
+    padding-top: 10px;
+    background-color: #0C1823;
+  }
+  .mobileView .studyContainer .navIcon {
+    font-size: 20px;
+    cursor: pointer;
+    float: right;
+    color: #116aaf;
+  }
+  .mobileView .contentText {
+    font-size: 21px;
+  }
+  .mobileView .filters {
+    border-right: unset;
+    margin-top: 10px;
+    padding: 0px 32px;
+    text-align: center;
+  }
+  .mobileView .filters div {
+    padding: 2px 13px;
+    margin-top: 7px;
+  }
+  .mobileView .filters .filterBox a {
+    font-size: 13px;
+    font-weight: bold;
+    color: #6d6e71;
+  }
+  .mobileView .searchDiv {
+    background: #000000;
+    margin-top: 10px;
+    border-radius: 5px;
+    display: none;
+  }
+  .mobileView .searchDiv input, .mobileView .searchDiv select {
+    background-color: #333333 !important;    
+    margin-top: 11px;
+    border: none !important;
+    height: 34px !important;
+    border-radius: 4px !important;
+    font-size: 13px;    
+    font-weight: 700;
+    width: 98%;
+    padding-left: 5px;
+  }
+  .mobileView .searchDiv select {
+    text-transform: uppercase;
+    text-transform: uppercase;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;    
+    background: url(../images/down-arrow.png) #333333 no-repeat calc(100% - 10px) !important;
+    border-radius: 19px;
+    padding: 7px;
+    height: 29px !important;
+  }
+  .mobileView .searchDiv .width-50 {
+    width: 49%;
+    display: inline-block;
+  }
+  .mobileView .searchDiv #studySearch {
+    width: 100%;
+    margin-top: 10px;
+    padding: 21px;
+    background-color: #009FDA;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    font-size: 17px;
+    font-weight: 500;
+  }
+  .mobileView #mstudyCount
+  {
+    margin-top: 6px;
+    height: 44px;
+    padding: 5px;
+    text-align: center;
+    font-size: 33px;
+    color: #1b75bc;
+    font-weight: bold;
+    background-color: #333 !important;
+    border: none !important;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+  .margin-top-10 {
+    margin-top: 10px;
+  }
+  .mobileView .table.studylistStudy > tbody > tr > td {
+    border-top: 1px solid #333;
+  }
+  .mobileView .hrLine {
+    border-top: 2px solid #00aeef;
+  }
+  .studylistStudy .textUpper {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .studylistStudy .pname
+  {
+    font-weight: bold;
+    color: #00aeef;
+  }
+  .mobileView .studylistStudy .studyAction
+  {
+    text-align: right;
+    padding-top: 15px;
+    padding-bottom: 0px;
+  }
+  .mobileView .studylistStudy:nth-child(even) {
+      background-color: #000000;
+  }
+}
+/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+@media (min-width:641px)  {
+  #settings-modal .modal-dialog, #share-modal .modal-dialog, #shareDialog .modal-dialog {
+    width: 80%;
+  }
+  .mobileView {
+    display: block;
+  }       
+  .desktopView {
+    display: none;
+  }
+  body>.header .header-menu .logo-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;    
+    right: 0;
+    background-color: #000000;
+    overflow-x: hidden;
+    transition: 0.5s;    
+  }
+  .sidenav .closeSideNav {
+    text-align: right;
+    color: #1b75bc;
+    padding: 0px;
+    padding-right: 10px;
+    font-size: 23px;
+  }
+  .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;      
+      text-transform: uppercase;
+      font-weight: bolder;
+  }
+  #sidenav a.active {
+    color: #fff;
+  }
+  .sidenav a:hover {
+      color: #f1f1f1;
+  }
+  .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+  }
+  .mobileView .studyContainer {
+    width: 100%;
+    padding-top: 10px;
+    background-color: #0C1823;
+  }
+  .mobileView .studyContainer .navIcon {
+    font-size: 20px;
+    cursor: pointer;
+    float: right;
+    color: #116aaf;
+  }
+  .mobileView .contentText {
+    font-size: 21px;
+  }
+  .mobileView .filters {
+    border-right: unset;
+    margin-top: 10px;
+    padding: 0px 32px;
+    text-align: center;
+  }
+  .mobileView .filters div {
+    padding: 2px 13px;
+    margin-top: 7px;
+  }
+  .mobileView .filters .filterBox a {
+    font-size: 13px;
+    font-weight: bold;
+    color: #6d6e71;
+  }
+  .mobileView .searchDiv {
+    background: #000000;
+    margin-top: 10px;
+    border-radius: 5px;
+    display: none;
+  }
+  .mobileView .searchDiv input, .mobileView .searchDiv select {
+    background-color: #333333 !important;    
+    margin-top: 11px;
+    border: none !important;
+    height: 34px !important;
+    border-radius: 4px !important;
+    font-size: 13px;    
+    font-weight: 700;
+    width: 98%;
+    padding-left: 5px;
+  }
+  .mobileView .searchDiv select {
+    text-transform: uppercase;
+    text-transform: uppercase;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;    
+    background: url(../images/down-arrow.png) #333333 no-repeat calc(100% - 10px) !important;
+    border-radius: 19px;
+    padding: 7px;
+    height: 29px !important;
+  }
+  .mobileView .searchDiv .width-50 {
+    width: 49%;
+    display: inline-block;
+  }
+  .mobileView .searchDiv #studySearch {
+    width: 100%;
+    margin-top: 10px;
+    padding: 21px;
+    background-color: #009FDA;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    font-size: 17px;
+    font-weight: 500;
+  }
+  .mobileView #mstudyCount
+  {
+    margin-top: 6px;
+    height: 44px;
+    padding: 5px;
+    text-align: center;
+    font-size: 33px;
+    color: #1b75bc;
+    font-weight: bold;
+    background-color: #333 !important;
+    border: none !important;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+  .margin-top-10 {
+    margin-top: 10px;
+  }
+  .mobileView .table.studylistStudy > tbody > tr > td {
+    border-top: 1px solid #333;
+  }
+  .mobileView .hrLine {
+    border-top: 2px solid #00aeef;
+  }
+  .studylistStudy .textUpper {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .studylistStudy .pname
+  {
+    font-weight: bold;
+    color: #00aeef;
+  }
+  .mobileView .studylistStudy .studyAction
+  {
+    text-align: right;
+    padding-top: 15px;
+    padding-bottom: 0px;
+  }
+  .mobileView .studylistStudy:nth-child(even) {
+      background-color: #000000;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #share-modal .modal-dialog .modal-footer .form-group, #shareDialog .modal-dialog .modal-footer .form-group {
+    padding: 0px;
+  }
+}
+/* tablet, landscape iPad, lo-res laptops ands desktops */
+@media (min-width:961px)  {
+  .mobileView {
+    display: none;
+  }       
+  .desktopView {
+    display: block;
+  }
+  #settings-modal .modal-dialog, #share-modal .modal-dialog, #shareDialog .modal-dialog {
+    width: 45%;
+  }
+  body>.header .header-menu .logo-image {
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    margin-left: 50px;
+  }
+}
+/* big landscape tablets, laptops, and desktops */
+@media (min-width:1025px) { 
+  .mobileView {
+    display: none;
+  }       
+  .desktopView {
+    display: block;
+  }
+}
+/* hi-res laptops and desktops */
+@media (min-width:1281px) {
+  .mobileView {
+    display: none;
+  }       
+  .desktopView {
+    display: block;
+  }
+}
+/** mobile view css end **/

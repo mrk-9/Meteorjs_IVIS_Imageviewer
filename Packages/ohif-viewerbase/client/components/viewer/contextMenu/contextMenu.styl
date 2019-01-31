@@ -1,0 +1,41 @@
+@import "{ohif:design}/app"
+
+ul#contextMenu
+  width:115px
+  z-index:1
+  display:none
+  background:#000000 !important
+  position:absolute
+  border-color:#20a5d6 !important
+  border:5px solid #20a5d6 !important
+  -webkit-border-radius:12px !important
+  -moz-border-radius:12px !important
+  -ms-border-radius:12px !important
+  -o-border-radius:12px !important
+  border-radius:12px !important
+  padding:15px !important
+  list-style-type:none
+  .context-menu-item
+    height:28px
+    margin-bottom:5px
+    span
+      color:#91b9cd
+      padding-left:40px
+      margin-top:10px
+  li
+    background-repeat:no-repeat;
+  #context_wl
+    background: url("/images/nav-levels-on.png");
+    background-repeat:no-repeat;
+  #context_zoom
+    background: url("/images/nav-zoom-off.png");
+    background-repeat:no-repeat;
+  #context_pan
+    background: url("/images/nav-pan-off.png");
+    background-repeat:no-repeat;
+  #context_reset
+    background: url("/images/nav-reset-off.svg");
+    background-repeat:no-repeat;
+  #context_clear
+    background: url("/images/nav-clear-off.svg");
+    background-repeat:no-repeat;

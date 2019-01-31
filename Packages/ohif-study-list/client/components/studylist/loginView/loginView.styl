@@ -1,0 +1,294 @@
+.loginView
+  cursor: pointer
+
+.loginContainer
+  margin-top: 80px
+  margin-bottom: 80px
+  border-top: 1px solid #0f75bc
+
+.form-signin {
+  max-width: 570px;
+  padding: 15px 35px 45px;
+  margin: 0px auto;
+
+  .form-signin-heading,
+	.checkbox {
+	  margin-bottom: 30px;
+	}
+
+	.checkbox {
+	  font-weight: normal;
+	}
+
+	.form-control {
+	  position: relative;
+	  font-size: 16px;
+	  height: auto;
+	  padding: 10px;
+		@include box-sizing(border-box);
+
+		&:focus {
+		  z-index: 2;
+		}
+	}
+
+	input[type="text"] {
+	  margin-bottom: -1px;
+	  border-bottom-left-radius: 0;
+	  border-bottom-right-radius: 0;
+	}
+
+	input[type="password"] {
+	  margin-bottom: 20px;
+	  border-top-left-radius: 0;
+	  border-top-right-radius: 0;
+	}
+}
+
+.err_msg
+  padding: 12px;
+  background: #ff00006e;
+
+
+.layer-508 {
+	width: 100%;
+}
+
+.loginLogo {
+    height: 132px;
+    width: 296px;
+    margin: 0px auto 29px auto;
+}
+
+.otheroptions{
+    margin-top:29px;
+}
+
+.loginFormContainer .form-control {
+		height: 50px !important;
+    border: 1px solid #CCCCCC !important;
+    background-color: #FFFFFF !important;
+    margin-bottom:23px !important;
+    border-radius: 0 !important;
+}
+
+.loginFormContainer
+{
+    height: auto;
+    margin-bottom: 37px;
+}
+.login {
+    height: auto;
+    margin: 200px auto;
+}
+.logical-name-field {
+	height: 50px;
+	width: 454px;
+	border: 1px solid #CCCCCC;
+	background-color: #FFFFFF;
+  color: #000000;
+  font-size: 20px;
+  padding: 10px;
+}
+.login .form-control::-webkit-input-placeholder {
+
+  color: #CCCCCC;
+  font-family: "Source Sans Pro";
+  font-size: 20px;
+  text-align: center;
+
+}
+.login .form-control::-moz-placeholder { /* Firefox 19+ */
+
+  color: #CCCCCC;
+  font-family: "Source Sans Pro";
+  font-size: 20px;
+  text-align: center;
+}
+.login .form-control:-ms-input-placeholder { /* IE 10+ */
+
+  color: #CCCCCC;
+  font-family: "Source Sans Pro";
+  font-size: 20px;
+  text-align: center;
+}
+.login .form-control:-moz-placeholder { /* Firefox 18- */
+
+  color: #CCCCCC;
+  font-family: "Source Sans Pro";
+  font-size: 20px;
+  text-align: center;
+}
+
+.save {
+  background-color: #009ED9;
+  border: none;
+  border-radius: 0 !important;
+}
+.logintxt {
+	height: 12px;
+	width: 47px;
+	color: #FFFFFF;
+	font-family: "Source Sans Pro";
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+}
+.powered-by {
+	height: 17px;
+	width: 96px;
+	color: #649CD5;
+	font-family: "Open Sans";
+	font-size: 14px;
+	font-style: italic;
+	font-weight: bold;
+	text-align: center;
+}
+.footerLogo {
+  height: 44px;
+  width: 304px;
+  padding-left: 10px;
+}
+.remember-me {
+	height: 13px;
+	width: 125px;
+	color: #FFFFFF;
+	font-family: Montserrat;
+	font-size: 16px;
+	font-weight: bold;
+	letter-spacing: 10px;
+	line-height: 21px;
+}
+.forgotpassword {
+	color: #FFFFFF;
+	font-family: "Source Sans Pro";
+	font-size: 15px;
+	font-style: italic;
+	float: right;
+}
+.remember-me {
+  width: 40px;
+  height: 10px;
+  background: #555;
+  margin: 20px 80px;
+  position: relative;
+  border-radius: 3px;
+}
+/* The container */
+.checkboxContainer {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: 500;
+}
+
+/* Hide the browser's default checkbox */
+.checkboxContainer input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: transparent;
+    border: 1px solid #ccc;
+}
+
+/* On mouse-over, add a grey background color */
+.checkboxContainer:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkboxContainer input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkboxContainer:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.checkboxContainer input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkboxContainer .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+.footer {
+    position: fixed;
+    bottom: 30px;
+}
+
+.footer-left {
+  	height: 71px;
+    padding-left: 100px;
+}
+.footer-right {
+  height: 71px;
+  padding-right: 100px;
+}
+.footer-right img{
+  float: right;
+  margin-right: 10px;
+  margin-top: 12px;
+}
+
+.footer-icons {
+  height: 37px;
+  width: 36px;
+}
+input[type=checkbox] {
+  visibility: hidden;
+}
+
+#logoContainer{
+  text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .footerLogo {
+        height: 28px;
+        width: 200px;
+     }
+     .footer-icons {
+          height: 30px;
+          width: 30px;
+      }
+      .footer-left {
+        	height: 71px;
+          padding-left: 20px;
+      }
+      .footer-right {
+        height: 71px;
+        padding-right: 20px;
+      }
+}

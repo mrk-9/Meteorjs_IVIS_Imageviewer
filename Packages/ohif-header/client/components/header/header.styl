@@ -1,0 +1,27 @@
+@import "{ohif:design}/app"
+
+
+  &>.clearfix
+    position: relative
+
+  .header-menu
+    padding: 4px 0
+    font-size: 13px
+    font-weight: 400
+    line-height: 18px
+    text-decoration: none
+    theme('color', '$defaultColor')
+
+    &:empty
+      display: none
+
+  &.header-big
+    height: $topBarExpandedHeight
+    background-color: rgba(21, 25, 30, 0.7)
+
+  body>.header {
+    height: 81px;
+    width: 100%;
+    background-color: #000;
+    background: linear-gradient(#01254c, #000);
+  }

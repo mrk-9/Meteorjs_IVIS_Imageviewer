@@ -1,0 +1,548 @@
+@require '{ohif:design}/app'
+
+.toolbarSection
+  flex: 0 0 auto
+  height: $toolbarHeight  
+  position: relative!important
+  transition(height 300ms ease)
+  width: 71%
+  z-index:1!important
+  flex:0 0 auto;
+  padding-top:0px;
+  display:block
+  height:78px
+  float: right;
+  bottom: 5px;
+  &.expanded
+    height: $toolbarHeight + $toolbarDrawerHeight
+  .clearfix
+    position:relative
+
+/** mobile view css start **/
+/* smartphones, iPhone, portrait 480x320 phones */
+@media (min-width:320px)
+  .toolbarSection {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .toolbarSectionTools
+    .seperator
+      display:none!important
+  #length,#annotate,#magnify,#layout,#export_file,#clearTools,#overlay,#resetViewport,#draw,#toggleReferenceLines,#filter,#toggleCineDialog
+    display: none;
+  #toggleAdvanced #space_angle,
+  #toggleAdvanced #space_lung
+    display: block!important     
+  #toggleShareDialog,#toggleReportDialog
+    display: none
+  #toggleAdvanced
+    .toolbarSectionDrawerContainer
+      width: 422px
+      left: 15%;       
+    .toolbarSectionDrawer
+      height:260px
+      display: flex
+      flex-wrap: wrap
+      width: 70%
+  #toggleAdvanced #length,
+  #toggleAdvanced #annotate,
+  #toggleAdvanced #magnify,
+  #toggleAdvanced #layout,
+  #toggleAdvanced #clearTools,
+  #toggleAdvanced #abdomen,
+  #toggleAdvanced #brain,
+  #toggleAdvanced #bone,
+  #toggleAdvanced #lung,
+  #toggleAdvanced #toggleShareDialog,
+  #toggleAdvanced #export_file
+  #toggleAdvanced #toggleMetadataDialog,
+  #toggleAdvanced #toggleReportDialog,
+  #toggleAdvanced #draw,
+  #toggleAdvanced #toggleReferenceLines,
+  #toggleAdvanced #toggleCineDialog,
+  #toggleAdvanced #default_filter,
+  #toggleAdvanced #overlay,
+  #toggleAdvanced #resetViewport
+    display: inline-block
+
+@media (min-width:384px)
+  .toolbarSection {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .toolbarSectionTools
+    .seperator
+      display:none!important
+  #length,#annotate,#layout,#export_file,#clearTools,#overlay,#resetViewport,#toggleReferenceLines,#filter,#toggleCineDialog
+    display: none;
+  #magnify,#draw
+    display: inline-block
+  #toggleAdvanced #space_angle,
+  #toggleAdvanced #space_lung
+    display: block!important     
+  #toggleShareDialog,#toggleReportDialog
+    display: none
+  #toggleAdvanced
+    .toolbarSectionDrawerContainer
+      width: 422px
+      left: 0%;       
+    .toolbarSectionDrawer
+      height:260px
+      display: flex
+      flex-wrap: wrap
+      width: 70%
+  #toggleAdvanced #length,
+  #toggleAdvanced #annotate,  
+  #toggleAdvanced #layout,
+  #toggleAdvanced #clearTools,
+  #toggleAdvanced #abdomen,
+  #toggleAdvanced #brain,
+  #toggleAdvanced #bone,
+  #toggleAdvanced #lung,
+  #toggleAdvanced #toggleShareDialog,
+  #toggleAdvanced #export_file
+  #toggleAdvanced #toggleMetadataDialog,
+  #toggleAdvanced #toggleReportDialog,  
+  #toggleAdvanced #toggleReferenceLines,
+  #toggleAdvanced #toggleCineDialog,
+  #toggleAdvanced #default_filter,
+  #toggleAdvanced #overlay,
+  #toggleAdvanced #resetViewport
+    display: inline-block    
+  #toggleAdvanced #magnify,
+  #toggleAdvanced #draw
+    display: none
+/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+@media (min-width:481px)
+  .toolbarSection {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .toolbarSectionTools
+    .seperator
+      display:none!important
+  #length,#annotate,#layout,#export_file,#clearTools,#overlay,#resetViewport,#filter,#toggleCineDialog,#toggleReferenceLines,#toggleReportDialog
+    display: none;
+  #toggleShareDialog,#magnify,#draw
+    display: inline-block
+  #toggleAdvanced #space_angle,
+  #toggleAdvanced #space_lung
+    display: block!important
+  #toggleAdvanced
+    .toolbarSectionDrawerContainer
+      width: 422px             
+    .toolbarSectionDrawer
+      height:260px
+      display: flex
+      flex-wrap: wrap
+      width: 70%
+  #toggleAdvanced #length,
+  #toggleAdvanced #annotate,  
+  #toggleAdvanced #layout,
+  #toggleAdvanced #clearTools,
+  #toggleAdvanced #abdomen,
+  #toggleAdvanced #brain,
+  #toggleAdvanced #bone,
+  #toggleAdvanced #lung,
+  #toggleAdvanced #export_file
+  #toggleAdvanced #toggleMetadataDialog,  
+  #toggleAdvanced #toggleCineDialog,
+  #toggleAdvanced #toggleReportDialog,
+  #toggleAdvanced #toggleReferenceLines
+    display: inline-block
+  #toggleAdvanced #toggleShareDialog,  
+  #toggleAdvanced #magnify,
+  #toggleAdvanced #draw
+    display: none
+
+/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+@media (min-width:641px)
+  .toolbarSection {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .toolbarSectionTools
+    .seperator
+      display:none!important
+  #length,#annotate,#export_file,#clearTools,#overlay,#resetViewport,#toggleCineDialog,#toggleReferenceLines,#layout
+    display: none;
+  #magnify,#toggleShareDialog,#toggleReportDialog,#filter,#draw
+    display: inline-block
+  #toggleAdvanced #space_angle,
+  #toggleAdvanced #space_lung
+    display: block!important
+  #toggleAdvanced
+    .toolbarSectionDrawerContainer
+      width: 422px             
+    .toolbarSectionDrawer
+      height:260px
+      display: flex
+      flex-wrap: wrap
+      width: 70%
+  #toggleAdvanced #length,
+  #toggleAdvanced #annotate,
+  #toggleAdvanced #toggleReferenceLines,
+  #toggleAdvanced #clearTools,
+  #toggleAdvanced #export_file,
+  #toggleAdvanced #toggleMetadataDialog,
+  #toggleAdvanced #layout,
+  #toggleAdvanced #toggleCineDialog
+    display: inline-block
+  #toggleAdvanced #toggleShareDialog,
+  #toggleAdvanced #toggleReportDialog,
+  #toggleAdvanced #abdomen,
+  #toggleAdvanced #brain,
+  #toggleAdvanced #bone,
+  #toggleAdvanced #lung,
+  #toggleAdvanced #magnify,
+  #toggleAdvanced #draw,
+  #toggleAdvanced #default_filter
+    display: none
+
+@media (min-width:700px)
+  body>.header .header-menu .logo-image {
+    display: inline-block !important;
+    align-items: center;
+    justify-content: center;
+  }
+  .toolbarSection {
+    width: 55%;
+    display: block;
+    align-items: unset;
+    justify-content: unset;
+  }
+  .toolbarSectionTools
+    .seperator
+      display:none!important
+  #length,#export_file,#clearTools,#toggleReferenceLines,#toggleCineDialog,#toggleMetadataDialog,#overlay,#resetViewport,#filter,#layout,#annotate,#toggleShareDialog,#toggleReportDialog
+    display: none;
+  #draw,#magnify
+    display: inline-block
+  #toggleAdvanced #space_angle,
+  #toggleAdvanced #space_lung
+    display: block!important
+  #toggleAdvanced
+    .toolbarSectionDrawerContainer
+      width: 300px             
+    .toolbarSectionDrawer
+      height:315px
+      display: flex
+      flex-wrap: wrap
+      width: 70%
+    .seperator
+      display: none !important;
+  #toggleAdvanced #length,  
+  #toggleAdvanced #clearTools,
+  #toggleAdvanced #export_file,
+  #toggleAdvanced #toggleMetadataDialog,
+  #toggleAdvanced #toggleCineDialog,
+  #toggleAdvanced #toggleMetadataDialog,
+  #toggleAdvanced #overlay,
+  #toggleAdvanced #resetViewport,
+  #toggleAdvanced #toggleReferenceLines,
+  #toggleAdvanced #abdomen,
+  #toggleAdvanced #brain,
+  #toggleAdvanced #bone,
+  #toggleAdvanced #lung,  
+  #toggleAdvanced #layout,
+  #toggleAdvanced #annotate,
+  #toggleAdvanced #toggleShareDialog,
+  #toggleAdvanced #toggleReportDialog,
+  #toggleAdvanced #default_filter
+    display: inline-block
+    
+  #toggleAdvanced #magnify
+    display: none
+
+@media (min-width:750px)
+  .toolbarSection {
+    width: 64%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .toolbarSectionTools
+    .seperator
+      display:none!important
+  #length,#export_file,#clearTools,#overlay,#resetViewport,#toggleCineDialog,#annotate,#toggleReportDialog,#toggleReferenceLines,#layout,#toggleShareDialog
+    display: none;
+  #filter,#draw,#magnify
+    display: inline-block
+  #toggleAdvanced #space_angle,
+  #toggleAdvanced #space_lung
+    display: block!important
+  #toggleAdvanced
+    .toolbarSectionDrawerContainer
+      width: 300px             
+    .toolbarSectionDrawer
+      height:260px
+      display: flex
+      flex-wrap: wrap
+      width: 70%
+  #toggleAdvanced #length,  
+  #toggleAdvanced #clearTools,
+  #toggleAdvanced #export_file,
+  #toggleAdvanced #toggleMetadataDialog,
+  #toggleAdvanced #toggleCineDialog,
+  #toggleAdvanced #annotate,
+  #toggleAdvanced #toggleReportDialog,
+  #toggleAdvanced #toggleReferenceLines,
+  #toggleAdvanced #toggleShareDialog,
+  #toggleAdvanced #layout
+    display: inline-block  
+  #toggleAdvanced #draw,
+  #toggleAdvanced #abdomen,
+  #toggleAdvanced #brain,
+  #toggleAdvanced #bone,
+  #toggleAdvanced #lung,
+  #toggleAdvanced #annotate,
+  #toggleAdvanced #magnify,
+  #toggleAdvanced #default_filter
+    display: none
+
+@media (min-width:860px)
+  .toolbarSection {
+    width: 67%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .toolbarSectionTools
+    .seperator
+      display:none!important
+  #length,#export_file,#clearTools,#overlay,#resetViewport,#toggleCineDialog,#toggleMetadataDialog,#annotate,#toggleReferenceLines,#layout,#toggleReportDialog
+    display: none;
+  #toggleShareDialog,#filter,#draw,#magnify
+    display: inline-block
+  #toggleAdvanced #space_angle,
+  #toggleAdvanced #space_lung
+    display: block!important
+  #toggleAdvanced
+    .toolbarSectionDrawerContainer
+      width: 300px             
+    .toolbarSectionDrawer
+      height:260px
+      display: flex
+      flex-wrap: wrap
+      width: 70%
+  #toggleAdvanced #length,  
+  #toggleAdvanced #clearTools,
+  #toggleAdvanced #export_file,
+  #toggleAdvanced #toggleMetadataDialog,
+  #toggleAdvanced #toggleReferenceLines,
+  #toggleAdvanced #toggleCineDialog,
+  #toggleAdvanced #annotate,
+  #toggleAdvanced #layout,
+  #toggleAdvanced #toggleReportDialog  
+    display: inline-block
+  #toggleAdvanced #toggleShareDialog,
+  #toggleAdvanced #draw,
+  #toggleAdvanced #abdomen,
+  #toggleAdvanced #brain,
+  #toggleAdvanced #bone,
+  #toggleAdvanced #lung,  
+  #toggleAdvanced #magnify  
+    display: none
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */
+@media (min-width:961px)  
+  .toolbarSection {
+    width: 100%;
+    display: block;
+    align-items: unset;
+    justify-content: unset;
+  }
+  .toolbarSectionTools
+    .seperator
+      display:none!important
+  #length,#export_file,#clearTools,#toggleReferenceLines,#toggleCineDialog,#toggleMetadataDialog,#overlay,#resetViewport
+    display: none;
+  #toggleShareDialog,#toggleReportDialog,#filter,#layout,#draw,#annotate,#magnify
+    display: inline-block
+  #toggleAdvanced #space_angle,
+  #toggleAdvanced #space_lung
+    display: block!important
+  #toggleAdvanced
+    .toolbarSectionDrawerContainer
+      width: 300px             
+    .toolbarSectionDrawer
+      height:260px
+      display: flex
+      flex-wrap: wrap
+      width: 70%
+    .seperator
+      display: none !important;
+  #toggleAdvanced #length,  
+  #toggleAdvanced #clearTools,
+  #toggleAdvanced #export_file,
+  #toggleAdvanced #toggleMetadataDialog,
+  #toggleAdvanced #toggleCineDialog,
+  #toggleAdvanced #toggleMetadataDialog,
+  #toggleAdvanced #overlay,
+  #toggleAdvanced #resetViewport,
+  #toggleAdvanced #toggleReferenceLines  
+    display: inline-block
+  #toggleAdvanced #toggleShareDialog,
+  #toggleAdvanced #toggleReportDialog,
+  #toggleAdvanced #layout,
+  #toggleAdvanced #draw,
+  #toggleAdvanced #abdomen,
+  #toggleAdvanced #brain,
+  #toggleAdvanced #bone,
+  #toggleAdvanced #lung,
+  #toggleAdvanced #annotate,
+  #toggleAdvanced #magnify
+    display: none
+
+/* big landscape tablets, laptops, and desktops */
+@media (min-width:1025px) { 
+  
+}
+/* hi-res laptops and desktops */
+@media (min-width:1281px)
+  .toolbarSection {
+    width: 100%;
+    display: block;
+    align-items: unset;
+    justify-content: unset;
+  }
+  .toolbarSectionTools
+    .seperator
+      display:inline-block!important
+  #length,#export_file,#clearTools,#layout,#toggleCineDialog,#toggleMetadataDialog
+    display: none;
+  #toggleShareDialog,#toggleReportDialog,#filter,#magnify,#draw,#annotate,#overlay,#resetViewport
+    display: inline-block
+  #toggleAdvanced #space_angle,
+  #toggleAdvanced #space_lung
+    display: block!important
+  #toggleAdvanced
+    .toolbarSectionDrawerContainer
+      width: 500px             
+    .toolbarSectionDrawer
+      height:115px
+      display: flex
+      flex-wrap: wrap
+      width: 75%
+  #toggleAdvanced #length,  
+  #toggleAdvanced #clearTools,
+  #toggleAdvanced #export_file,
+  #toggleAdvanced #toggleMetadataDialog,
+  #toggleAdvanced #layout,
+  #toggleAdvanced #toggleCineDialog,
+  #toggleAdvanced #toggleMetadataDialog,
+  #toggleAdvanced #toggleReferenceLines  
+    display: inline-block
+  #toggleAdvanced #toggleShareDialog,
+  #toggleAdvanced #toggleReportDialog,
+  #toggleAdvanced #magnify,
+  #toggleAdvanced #draw,
+  #toggleAdvanced #abdomen,
+  #toggleAdvanced #brain,
+  #toggleAdvanced #bone,
+  #toggleAdvanced #lung,
+  #toggleAdvanced #annotate,
+  #toggleAdvanced #overlay,
+  #toggleAdvanced #resetViewport
+    display: none
+
+@media (min-width:1500px)
+  .toolbarSection {
+    width: 100%;
+    display: block;
+    align-items: unset;
+    justify-content: unset;
+  }
+  .toolbarSectionTools
+    .seperator
+      display:inline-block!important
+  #layout,#toggleCineDialog,#toggleMetadataDialog
+    display: none;
+  #toggleShareDialog,#toggleReportDialog,#filter,#magnify,#draw,#annotate,#overlay,#resetViewport,#length,#export_file,#clearTools
+    display: inline-block
+  #toggleAdvanced #space_angle,
+  #toggleAdvanced #space_lung
+    display: block!important
+  #toggleAdvanced
+    .toolbarSectionDrawerContainer
+      width: 445px             
+    .toolbarSectionDrawer
+      height:115px
+      display: flex
+      flex-wrap: wrap
+      width: 70%
+  #toggleAdvanced #toggleMetadataDialog,
+  #toggleAdvanced #layout,
+  #toggleAdvanced #toggleCineDialog,
+  #toggleAdvanced #toggleMetadataDialog,
+  #toggleAdvanced #toggleReferenceLines  
+    display: inline-block
+  #toggleAdvanced #toggleShareDialog,
+  #toggleAdvanced #toggleReportDialog,
+  #toggleAdvanced #magnify,
+  #toggleAdvanced #draw,
+  #toggleAdvanced #abdomen,
+  #toggleAdvanced #brain,
+  #toggleAdvanced #bone,
+  #toggleAdvanced #lung,
+  #toggleAdvanced #annotate,
+  #toggleAdvanced #overlay,
+  #toggleAdvanced #resetViewport,
+  #toggleAdvanced #clearTools,
+  #toggleAdvanced #length,
+  #toggleAdvanced #export_file
+    display: none
+
+@media (min-width:1670px)
+  .toolbarSection {
+    width: 100%;
+    display: block;
+    align-items: unset;
+    justify-content: unset;
+    padding-top: 10px;
+  }
+  .toolbarSectionTools
+    .seperator
+      display:inline-block!important
+  #toggleShareDialog,#toggleReportDialog,#filter,#layout,#draw,#annotate,#overlay,#resetViewport,#length,#export_file,#clearTools,#magnify,#toggleCineDialog,#toggleReferenceLines
+    display: inline-block
+  #toggleAdvanced #space_angle,
+  #toggleAdvanced #space_lung
+    display: block!important
+  #toggleAdvanced
+    .toolbarSectionDrawerContainer
+      width: 613px             
+    .toolbarSectionDrawer
+      height:72px
+      display: flex
+      flex-wrap: wrap
+      width: 70%
+  #toggleAdvanced #toggleMetadataDialog  
+    display: inline-block
+  #toggleAdvanced #toggleShareDialog,
+  #toggleAdvanced #toggleReportDialog,
+  #toggleAdvanced #layout,
+  #toggleAdvanced #draw,
+  #toggleAdvanced #abdomen,
+  #toggleAdvanced #brain,
+  #toggleAdvanced #bone,
+  #toggleAdvanced #lung,
+  #toggleAdvanced #annotate,
+  #toggleAdvanced #overlay,
+  #toggleAdvanced #resetViewport,
+  #toggleAdvanced #clearTools,
+  #toggleAdvanced #magnify,
+  #toggleAdvanced #toggleCineDialog,  
+  #toggleAdvanced #export_file,
+  #toggleAdvanced #length,
+  #toggleAdvanced #toggleReferenceLines
+    display: none    
+/** mobile view css end **/

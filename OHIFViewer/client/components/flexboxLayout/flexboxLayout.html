@@ -1,0 +1,11 @@
+<template name="flexboxLayout">
+    <div class="backToStudylist"><a class="studylogo-text">STUDY LIST</a></div>
+    <div class="viewerSection">
+        <div class="sidebarMenu sidebar-left {{#unless leftSidebarOpen}}sidebar-open{{/unless}}">
+            {{> studyBrowser (clone this)}}
+        </div>
+        <div class="mainContent {{#unless leftSidebarOpen}}sidebar-left-open{{/unless}} {{#if rightSidebarOpen}}sidebar-right-open{{/if}}">
+            {{> viewerMain (clone this)}}
+        </div>
+    </div>
+</template>

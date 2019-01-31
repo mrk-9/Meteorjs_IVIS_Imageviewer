@@ -1,0 +1,17 @@
+<template name="reportDialog">
+    <dialog id="reportDialog">
+        <div id="view-reportDialog-pdf" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="view-pdf-title" aria-hidden="true" style="display: block;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body reportpdfBody">
+                        <button type="button" class="close" aria-label="Close" onclick="OHIF.commands.run('toggleReportDialog')"><span aria-hidden="true">X</span></button>
+                        <h2 class="text-center loadingText" style="display: none;">Loading....</h2>
+                        {{#let url=PDFUrl}}
+                            <iframe style="width: 100%; min-height: 95%; display: inline;" scrolling="no" allowfullscreen="" webkitallowfullscreen="" src={{url}}></iframe>
+                        {{/let}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+</template>

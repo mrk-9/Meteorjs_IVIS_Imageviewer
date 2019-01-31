@@ -1,0 +1,77 @@
+<template name="shareDialog">
+    <dialog id="shareDialog">
+        <div class="modal-dialog " role="document">
+            {{#form class=(concat 'modal-content ' ) hideValidationBox=true
+            }}
+            <div class="modal-body">
+                <button type="button" class="close shareDialogClose" aria-label="Close"><span aria-hidden="true">X</span></button>
+                <div class="form-group col-sm-12 padd-right-0 modalTitleDiv">
+                    <p class="shareImg-title">Share Image</p>
+                </div>
+                <div class="form-group col-sm-12">
+                    <input type="email" class="form-control from-control-textbox" name="image-share-email" placeholder="Email ID" id="image-share-email">
+                </div>
+                <div class="form-group col-sm-12">
+                    <input type="password" class="form-control from-control-textbox" value="" name="image-share-password" autocomplete="new-password" id="image-share-password" placeholder="Password">
+                </div>
+                <div class="form-group col-sm-12">
+                  <input type="text" class="form-control from-control-textbox" value="" name="image-share-mobile" id="image-share-mobile" placeholder="Mobile no.">
+                  <label class="from-control-text mobileDesc">(Entering a mobile number will automatically send a text with the password)</label>      
+                </div>
+                <div class="form-group col-sm-12">
+                    <label class="from-control-text" style="color: #636669;font-size: 16px;">Notes</label>
+                    <textarea class="form-control" rows="8" id="image-share-message" name="image-share-message" placeholder="Your message"></textarea>
+                </div>
+                <div class="form-group col-sm-12">
+                    <select name="image-share-duration" id="duration" class="form-control from-control-textbox">
+                        <option value="30">30 days</option>
+                        <option value="60">60 days</option>
+                        <option value="90" selected>90 days</option>
+                        <option value="180">6 Months</option>
+                        <option value="365">1 Year</option>
+                    </select>
+                </div>
+                <div class="modal-footer">                    
+                    <div class="form-group col-sm-6 padd-left-0">
+                        {{#button action='Cancel'
+                            disabled=this.cancelDisabled
+                            class=(concat 'btn btn-cancel ' (choose this.cancelClass 'btn-secondary'))
+                            tagAttributes=(extend this.tagAttributes data-dismiss='modal')
+                        }}{{choose this.cancelLabel 'Cancel'}}{{/button}}
+                    </div>
+                    <div class="form-group col-sm-6 padd-right-0">
+                        {{#button action='Share'
+                            disabled=this.confirmDisabled
+                            class=(concat 'btn btn-confirm btn-primary ' (choose this.confirmClass 'btn-primary'))
+                        }}{{choose this.confirmLabel 'Share'}}{{/button}}
+                    </div>                 
+                </div>
+            </div>
+            {{/form}}
+        </div>
+    </dialog>
+    <div id="viewer-share-success-modal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="viewer-share-success-modal" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class='modal-content'>
+              <div class="modal-body">
+                <div class="form-group col-sm-12 padd-right-0" style="text-align:center;">
+                  <img class="" src = "/imageviewer/images/tick-circle.png" />
+                  <p class="success-heading">Image Shared!</p>
+                  <p style="font-size: 16px;color: #fff;">A new share of this image was successfully sent.</p>
+                </div>
+                <div class="shareDetail">
+                  <p id="vstudyPname"></p>
+                  <p id="vstudyDesc"></p>
+                  <div>Shared <span id="vsharedDate"></span></div>
+                  <div>Notification sent to Mobile: <span id="vstudyMobileNo"></span></div>
+                </div>
+                <div class="modal-footer" style="border-top: 0px;">
+                  <div class="form-group col-sm-12 padd-right-0" style="text-align:center;margin-bottom: 0px;">
+                    <a id="vimageshareOK">OK</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+</template>

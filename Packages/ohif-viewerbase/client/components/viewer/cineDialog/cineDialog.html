@@ -1,0 +1,48 @@
+<template name="cineDialog">
+    <dialog id="cineDialog">
+        <button type="button" class="close" aria-label="Close" id="closeCineDialog"><span style = "color:#00aeef;padding: 6px;">X</span></button>
+        {{#form id='cineDialogForm' class=(getClassNames 'dialog-animated noselect') schema=instance.schema api=instance.api}}
+            {{>inputHidden key='intervalId'}}
+            <div class="cine-navigation">
+                <div class="btn-group">
+                    {{#button class='btn' disabled=(displaySetDisabled false) action='displaySetPrevious' title='Previous display set'}}
+                        <div style =""></div>
+                    {{/button}}
+                    {{#button class='btn' disabled=(displaySetDisabled true) action='displaySetNext' title='Next display set'}}
+                        <div style =""></div>
+                    {{/button}}
+                </div>
+            </div>
+            <div class="cine-controls">
+                <div class="btn-group">
+                    {{#button class='btn' action='cineFirst' title='Skip to first image' disabled=(buttonDisabled)}}
+                        <div style ="background: url(../images/nav-cine-rewind.svg); margin-top:2px;"></div>
+                    {{/button}}
+                    {{#button class='btn' action='cinePrevious' title='Previous image' disabled=(buttonDisabled)}}
+                        <div style ="background: url(../images/nav-cine-step-back.svg);"></div>
+                    {{/button}}
+                    {{#button class='btn' action='cineToggle' title='Play / Stop' class=(concat 'btn ' (valueIf isPlaying 'active' '')) disabled=(buttonDisabled)}}
+                        {{#if isPlaying}}
+                            <div style ="background: url(../images/nav-cine-stop.svg)"></div>
+                        {{else}}
+                            <div style ="background: url(../images/nav-cine-play.svg)"></div>
+                        {{/if}}
+                    {{/button}}
+                    {{#button class='btn' action='cineNext' title='Next image' disabled=(buttonDisabled)}}
+                        <div style ="background: url(../images/nav-cine-step-forward.svg)"></div>
+                    {{/button}}
+                    {{#button class='btn' action='cineLast' title='Skip to last image' disabled=(buttonDisabled)}}
+                        <div style ="background: url(../images/nav-cine-forward.svg);margin-top:2px;"></div>
+                    {{/button}}
+                </div>
+            </div>
+            <div class="cine-options">
+                <div class="fps-section">
+                    {{#inputRange key='framesPerSecond' class='p-a-0' labelClass='form-group m-a-0' labelAsDiv=true}}
+                    {{/inputRange}}
+                </div>
+                <span id="fps">{{framerate}} fps</span>
+            </div>
+        {{/form}}
+    </dialog>
+</template>
